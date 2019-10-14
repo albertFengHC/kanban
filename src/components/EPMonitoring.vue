@@ -198,12 +198,12 @@
             <div class="bottom">
                 <div class="bottomLeft">
                     <div class="bottomLeftLabel">
-                        <div class="ESLabel" ref="ESLabel"></div>
+                        <div class="circleLabel" ref="circleLabel"></div>
                     </div>
                 </div>
                 <div class="bottomRight">
                     <div class="bottomRightLabel">
-                        <div class="TTLabel" ref="TTLabel"></div>
+                        <div class="lineLabel" ref="lineLabel"></div>
                     </div>
                 </div>
             </div>
@@ -606,6 +606,229 @@
                 // 绘制图表
                 myChart.setOption(option);
             },
+            creatCircleLabel() {
+                const that = this;
+                const echarts = require('echarts');
+                // 基于准备好的dom，初始化echarts实例
+                const myChart = echarts.init(this.$refs.circleLabel);
+
+                let option = {
+                    tooltip: {
+                        trigger: 'item',
+                        formatter: "{b}: {c}%"
+                    },
+                    legend: {
+                        orient: 'vertical',
+                        x: 'right',
+                        y: 'middle',
+                        data: ['三级教育卡发放率', '总计'],
+                        textStyle: {
+                            color: '#fff'
+                        },
+                        show:true
+                    },
+                    series: [
+                        {
+                            // name: '访问来源',
+                            type: 'pie',
+                            radius: ['60%', '90%'],
+                            center: ["30%", "50%"],
+                            avoidLabelOverlap: false,
+                            label: {
+                                normal: {
+                                    show: true,
+                                    position: 'center',
+                                    formatter:function (argument) {
+                                        let html='三级教育卡'+"\n"+'发放率';
+                                        return html;
+                                    },
+                                    textStyle:{
+                                        // fontSize: 15,
+                                        color:'#fff'
+                                    }
+                                },
+                                emphasis: {
+                                    show: false,
+                                    textStyle: {
+                                        fontSize: '20',
+                                        fontWeight: 'bold',
+                                        color: '#fff',
+                                    },
+                                }
+                            },
+                            labelLine: {
+                                normal: {
+                                    show: false
+                                }
+                            },
+                            data: [
+                                {value: 86, name: '三级教育卡发放率'},
+                                {value: 100-86, name: '总数'},
+                            ],
+                            color: ['#00B050','#FFC000']
+                        },
+                    ]
+                };
+                // 绘制图表
+                myChart.setOption(option);
+            },
+            lineLabel() {
+                const echarts = require('echarts');
+                // 基于准备好的dom，初始化echarts实例
+                const myChart = echarts.init(this.$refs.lineLabel);
+
+                let option = {
+                    tooltip: {
+                        trigger: 'axis',
+                        axisPointer: {
+                            type: 'shadow'
+                        }
+                    },
+                    toolbox: {
+                        show: false,
+                        feature: {
+                            mark: {show: true},
+                            dataView: {show: true, readOnly: false},
+                            magicType: {show: false, type: ['line', 'bar']},
+                            restore: {show: true},
+                            saveAsImage: {show: true}
+                        }
+                    },
+                    dataZoom: [
+                        {
+                            show: false,
+                            start: 0,
+                            end: 1000
+                        },
+                        {
+                            type: 'inside',
+                            start: 0,
+                            end: 1000
+                        },
+                        {
+                            show: false,
+                            yAxisIndex: 0,
+                            filterMode: 'empty',
+                            width: 30,
+                            height: '80%',
+                            showDataShadow: false,
+                            left: '93%'
+                        }
+                    ],
+                    legend: {
+                        // orient: 'vertical',
+                        x: 'middle',
+                        y: 'top',
+                        data: ['进场人员','出场人员','在场人员总数'],
+                        textStyle: {
+                            color: '#fff'
+                        },
+                        show: true
+                    },
+                    grid: {
+                        top:"30px",
+                        left:"25px",
+                        right:"10px",
+                        bottom:"30px",
+                        containLabel: false
+                    },
+                    xAxis: {
+                        splitLine :{    //网格线
+                            lineStyle:{
+                                color: '#262F43',
+                                type:'dashed'    //设置网格线类型 dotted：虚线   solid:实线
+                            },
+                            show:false //隐藏或显示
+                        },
+                        type: 'category',
+                        data: ['1月份','2月份','3月份','4月份','5月份','6月份','7月份','8月份','9月份','10月份','11月份','12月份'],
+                        axisLabel: {
+                            show: true,
+                            textStyle: {
+                                color: '#00d2ff',
+                            }
+                        }
+                    },
+                    yAxis: {
+                        type: 'value',
+                        axisLabel: {
+                            show: true,
+                            textStyle: {
+                                color: '#00d2ff',
+                            },
+                            data:[1,25,50,75,100]
+                        },
+                        splitLine :{    //网格线
+                            lineStyle:{
+                                color: '#262F43',
+                                type:'dashed'    //设置网格线类型 dotted：虚线   solid:实线
+                            },
+                            show:true //隐藏或显示
+                        },
+                    },
+                    series: [
+                        {
+                            name: '进场人员',
+                            type: 'bar',
+                            data: [0,1,2,10,30,40,50,60,70,80,90,100],
+                            itemStyle: {
+                                normal: {
+                                    //这里是重点
+                                    color: '#B3BEDF',
+                                }
+                            },
+                            barWidth : 20,
+                            label: {
+                                normal: {
+                                    show: true,
+                                    textBorderColor: '#333',
+                                    textBorderWidth: 2,
+                                },
+                            },
+                        },
+                        {
+                            name: '出场人员',
+                            type: 'bar',
+                            data: [0,1,2,10,30,40,50,60,70,80,90,100],
+                            itemStyle: {
+                                normal: {
+                                    //这里是重点
+                                    color: '#3F6AB7',
+                                }
+                            },
+                            barWidth : 20,
+                            label: {
+                                normal: {
+                                    show: true,
+                                    textBorderColor: '#333',
+                                    textBorderWidth: 2,
+                                },
+                            },
+                        },
+                        {
+                            name:'在场人员总数',
+                            type:'bar',
+                            data: [0,1,2,10,30,40,50,60,70,80,90,100],
+                            itemStyle: {
+                                normal: {
+                                    //这里是重点
+                                    color: '#6F6132',
+                                }
+                            },
+                            barWidth : 20,
+                            label: {
+                                normal: {
+                                    show: true,
+                                    textBorderColor: '#333',
+                                    textBorderWidth: 2,
+                                },
+                            },
+                        }
+                    ]
+                };
+                // 绘制图表
+                myChart.setOption(option);
+            },
         },
         mounted() {
             this.getProjectVal();
@@ -614,6 +837,8 @@
             this.creatEDLabel();
             this.creatSOLabel();
             this.creatSELabel();
+            this.creatCircleLabel();
+            this.lineLabel();
         }
     }
 </script>
@@ -947,7 +1172,7 @@
 
     }
 
-    .EDLabel,.SOLabel,.SELabel{
+    .EDLabel,.SOLabel,.SELabel,.circleLabel,.lineLabel{
         width: 100%;
         height: 100%;
     }
@@ -967,11 +1192,21 @@
         margin: 10px;
     }
 
+    .bottomLeftLabel{
+        width: 100%;
+        height: 100%;
+    }
+
     .bottomRight{
         flex: 4;
         background: url('./../assets/EPMonitoringImg/地图背景框.png') no-repeat;
         background-size: 100% 100%;
         padding: 10px;
         margin: 10px;
+    }
+
+    .bottomRightLabel{
+        width: 100%;
+        height: 100%;
     }
 </style>
