@@ -140,7 +140,7 @@
                                         </thead>
                                     </table>
                                 </div>
-                                <table>
+                                <table :class="{'tableScrollAnimation': EntryPersonnelMonitoringData.approachPerson.length>=10}">
                                     <thead style="opacity: 0">
                                         <tr>
                                             <th>序号</th>
@@ -1131,6 +1131,9 @@
         text-align: center;
         color: #02E3FA;
         border-collapse: collapse;
+    }
+
+    .tableScrollAnimation{
         position: relative;
         top: 0;
         -webkit-animation: scrollToUp 10s linear infinite; /* 引入 scrollToUp动画 */
