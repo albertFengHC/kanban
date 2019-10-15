@@ -98,22 +98,15 @@
                         <div class="leftMidMaskTableTitle">
                             <table>
                                 <thead>
-                                <tr>
-                                    <th>风险清单项</th>
-                                    <th>最近检查时间</th>
-                                    <th>检查次数</th>
-                                </tr>
+                                    <tr>
+                                        <th>风险清单项</th>
+                                        <th>最近检查时间</th>
+                                        <th>检查次数</th>
+                                    </tr>
                                 </thead>
                             </table>
                         </div>
-                        <table>
-                            <thead style="opacity: 0">
-                                <tr>
-                                    <th>风险清单项</th>
-                                    <th>最近检查时间</th>
-                                    <th>检查次数</th>
-                                </tr>
-                            </thead>
+                        <table  :class="{'tableScrollAnimation': tableData.length>=15}">
                             <tbody>
                                 <tr v-for="(data,i) in tableData" :value="data.project" :key="i">
                                     <td>{{data.project}}</td>
@@ -135,15 +128,15 @@
                             <div class="leftBottomLeftFrameLeft">
                                 <div>
                                     <p>风险源总数</p>
-                                    <p><i>{{danger.allDanger}}</i>项</p>
+                                    <p><i>{{StatisticsStartInformationRiskSourcesData.allDanger}}</i>项</p>
                                 </div>
                                 <div>
                                     <p>已完工数</p>
-                                    <p><i>{{danger.endDanger}}</i>项</p>
+                                    <p><i>{{StatisticsStartInformationRiskSourcesData.endDanger}}</i>项</p>
                                 </div>
                                 <div>
                                     <p>未完工数</p>
-                                    <p><i>{{danger.startDanger}}</i>项</p>
+                                    <p><i>{{StatisticsStartInformationRiskSourcesData.startDanger}}</i>项</p>
                                 </div>
                             </div>
                             <div class="labelLeftFrame">
@@ -157,15 +150,15 @@
                             <div class="leftBottomMidFrameLeft">
                                 <div>
                                     <p>发生风险数</p>
-                                    <p><i>96</i>项</p>
+                                    <p><i>{{RiskHandlingInformationStatisticsData.riskDanger.allDanger}}</i>项</p>
                                 </div>
                                 <div>
                                     <p>已处理完</p>
-                                    <p><i>90</i>项</p>
+                                    <p><i>{{RiskHandlingInformationStatisticsData.riskDanger.processed}}</i>项</p>
                                 </div>
                                 <div>
                                     <p>未处理完</p>
-                                    <p><i class="redMark">6</i>项</p>
+                                    <p><i class="redMark">{{RiskHandlingInformationStatisticsData.riskDanger.untreated}}</i>项</p>
                                 </div>
                             </div>
                             <div class="labelMidFrame">
@@ -237,30 +230,21 @@
                                         </thead>
                                     </table>
                                 </div>
-                                <table>
-                                    <thead style="opacity: 0">
-                                        <tr>
-                                            <th>序号</th>
-                                            <th>项目名称</th>
-                                            <th>标段</th>
-                                            <th>监测工点</th>
-                                            <th>监控参数</th>
-                                            <th>采集时间</th>
-                                            <th>预警级别</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr v-for="(data,i) in (DBPIsShow===0?safetyRiskList.deepFP:DBPIsShow===1?safetyRiskList.highM:safetyRiskList.highS)" :value="data.F_ProjectName" :key="i">
-                                            <td>{{i++}}</td>
-                                            <td>{{data.F_ProjectName}}</td>
-                                            <td>{{data.F_BidSection}}</td>
-                                            <td>{{data.F_TestAddress}}</td>
-                                            <td>{{data.F_WarnParameter}}</td>
-                                            <td>{{data.F_CollectionDate}}</td>
-                                            <td>{{data.F_WarnType}}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                <div>
+                                    <table  :class="{'tableScrollAnimation': SafetyEarlyWarningMonitoringDangerousProjectsTableLength>=3}" ref="tableFrameTable">
+                                        <tbody>
+                                            <tr v-for="(data,i) in (DBPIsShow===0?safetyRiskList.deepFP:DBPIsShow===1?safetyRiskList.highM:safetyRiskList.highS)" :value="data.F_ProjectName" :key="i">
+                                                <td>{{i++}}</td>
+                                                <td>{{data.F_ProjectName}}</td>
+                                                <td>{{data.F_BidSection}}</td>
+                                                <td>{{data.F_TestAddress}}</td>
+                                                <td>{{data.F_WarnParameter}}</td>
+                                                <td>{{data.F_CollectionDate}}</td>
+                                                <td>{{data.F_WarnType}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -321,18 +305,7 @@
                                     </thead>
                                 </table>
                             </div>
-                            <table ref="rightMRTable">
-                                <thead style="opacity: 0">
-                                    <tr>
-                                        <th>序号</th>
-                                        <th>项目名称</th>
-                                        <th>标段</th>
-                                        <th>监测工点</th>
-                                        <th>监控参数</th>
-                                        <th>采集时间</th>
-                                        <th>预警级别</th>
-                                    </tr>
-                                </thead>
+                            <table ref="rightMRTable"  :class="{'tableScrollAnimation': SafetyEarlyWarningMonitoringSpecialEquipmentTableLength>=3}">
                                 <tbody>
                                     <tr v-for="(data,i) in (SEIsShow===0?specialEquipmentList.towerC:SEIsShow===1?specialEquipmentList.gantryC:(SEIsShow===2?specialEquipmentList.constructionE:specialEquipmentList.bridgeEM))" :value="data.F_ProjectName" :key="i">
                                         <td>{{i++}}</td>
@@ -392,6 +365,12 @@
         },
         data() {
             return {
+                SafetyEarlyWarningMonitoringDangerousProjectsTableLength: '',
+                SafetyEarlyWarningMonitoringSpecialEquipmentTableLength: '',
+                RiskHandlingInformationStatisticsData:{
+                    riskDanger: '',
+                    riskDangerLevel: ''
+                },
                 DBPIsShow: 0,
                 SEIsShow: 0,
                 DBP: ['深基坑监控','高支模监控','高边坡监控','隧道监控'],
@@ -409,7 +388,7 @@
                     constructionE: [],
                     bridgeEM: [],
                 },
-                danger:'',
+                StatisticsStartInformationRiskSourcesData:'',
                 mapData: {
                     valCompany: '',
                     valProvince: '',
@@ -509,8 +488,9 @@
                 this.getContractVal(this.mapData.valProject);
                 this.changeSeasonMonth(e);
                 this.$refs.map.getRouteData(this.mapData.valContract === '' ? this.mapData.valProject : this.mapData.valContract);
-                this.getAllData();
+                this.getStatisticsStartInformationRiskSourcesData();
                 this.getSRData();
+                this.getRiskHandlingInformationStatisticsData();
             },
             getProjectVal() {
                 const that = this;
@@ -582,8 +562,6 @@
             },
             changeProject() {
                 this.$refs.map.mapProvinceShow(this.mapData.valProvince);
-                this.getAllData();
-                this.getSRData();
             },
             getData() {
                 const that = this;
@@ -659,8 +637,8 @@
                                 }
                             },
                             data: [
-                                {value: that.danger.endDanger, name: '已完工数'},
-                                {value: that.danger.startDanger, name: '未完工数'},
+                                {value: that.StatisticsStartInformationRiskSourcesData.endDanger, name: '已完工数'},
+                                {value: that.StatisticsStartInformationRiskSourcesData.startDanger, name: '未完工数'},
                             ],
                             color: ['#00B050','#FFC000']
                         },
@@ -670,6 +648,7 @@
                 myChart.setOption(option);
             },
             creatLabelMid() {
+                const that = this;
                 const echarts = require('echarts');
                 // 基于准备好的dom，初始化echarts实例
                 const myChart = echarts.init(this.$refs.labelMid);
@@ -683,7 +662,7 @@
                         orient: 'vertical',
                         x: 'right',
                         y: 'middle',
-                        data: ['发生风险数', '已处理完', '未处理完'],
+                        data: ['已处理完', '未处理完'],
                         textStyle: {
                             color: '#fff'
                         },
@@ -724,11 +703,10 @@
                                 }
                             },
                             data: [
-                                {value: 96, name: '发生风险数'},
-                                {value: 90, name: '已处理完'},
-                                {value: 6, name: '未处理完'},
+                                {value: that.RiskHandlingInformationStatisticsData.riskDanger.processed, name: '已处理完'},
+                                {value: that.RiskHandlingInformationStatisticsData.riskDanger.untreated, name: '未处理完'},
                             ],
-                            color: ['#E3AB00','#F40000','#FFF']
+                            color: ['#00B050','#FFC000']
                         },
                     ]
                 };
@@ -736,6 +714,7 @@
                 myChart.setOption(option);
             },
             creatLabelRight() {
+                const that = this;
                 const echarts = require('echarts');
                 // 基于准备好的dom，初始化echarts实例
                 const myChart = echarts.init(this.$refs.labelRight);
@@ -796,7 +775,7 @@
                         {
                             name: '项',
                             type: 'bar',
-                            data: [20,31,6,1],
+                            data: [that.RiskHandlingInformationStatisticsData.riskDangerLevel.oneType,that.RiskHandlingInformationStatisticsData.riskDangerLevel.twoType,that.RiskHandlingInformationStatisticsData.riskDangerLevel.threeType,that.RiskHandlingInformationStatisticsData.riskDangerLevel.fourType],
                             itemStyle: {
                                 normal: {
                                     color: function(params) {
@@ -833,7 +812,7 @@
                     this.maskShowTrigger = false;
                 }
             },
-            getAllData(){
+            getStatisticsStartInformationRiskSourcesData(){
                 const that = this;
                 const parameter = {
                     companyId: this.mapData.valContract === '' ? this.mapData.valProject : this.mapData.valContract,
@@ -844,12 +823,9 @@
                 // 发送 POST 请求
                 this.$getUrl('getRiskDangerData.do', parameter)
                     .then(function (response) {
-                        that.danger = '';
-                        that.danger = response.riskDangerData[0];
+                        that.StatisticsStartInformationRiskSourcesData = response.riskDangerData[0];
 
                         that.creatLabelLeft();
-                        that.creatLabelMid();
-                        that.creatLabelRight();
                     })
                     .catch(function (error) {
                         // console.log(error);
@@ -895,6 +871,28 @@
                         // console.log(error);
                     });
             },
+            getRiskHandlingInformationStatisticsData(){
+                const that = this;
+                const parameter = {
+                    companyId: this.mapData.valContract === '' ? this.mapData.valProject : this.mapData.valContract,
+                    yearStr: this.mapData.valYear,
+                    monthStr: this.mapData.valMonth,
+                    quarterStr: this.mapData.valSeason,
+                };
+                // 发送 POST 请求
+                this.$getUrlSR('getRiskDanger.do', parameter)
+                    .then(function (data) {
+                        console.log(data);
+                        that.RiskHandlingInformationStatisticsData.riskDanger = data.riskDanger[0];
+                        that.RiskHandlingInformationStatisticsData.riskDangerLevel = data.riskDangerLevel[0];
+
+                        that.creatLabelMid();
+                        that.creatLabelRight();
+                    })
+                    .catch(function (error) {
+                        // console.log(error);
+                    });
+            },
             DBProject(e){
                 this.DBPIsShow = e;
             },
@@ -906,11 +904,12 @@
             this.getProjectVal();
             this.getContractVal();
             this.getData();
-            this.getAllData();
+            this.getStatisticsStartInformationRiskSourcesData();
             this.getSRData();
-            this.$nextTick(()=>{
-                console.log(this.$refs.rightMRTable);
-            });
+            this.getRiskHandlingInformationStatisticsData();
+            console.log(this.$refs.rightMRTable.rows.length);
+            this.SafetyEarlyWarningMonitoringDangerousProjectsTableLength = this.$refs.tableFrameTable.rows.length;
+            this.SafetyEarlyWarningMonitoringSpecialEquipmentTableLength = this.$refs.rightMRTable.rows.length;
         },
     }
 </script>
@@ -1070,6 +1069,7 @@
         margin: 25px;
         background-color: #2F4F88;
         padding: 10px;
+        width: 38%;
         height: 375px;
         z-index: 1000;
         overflow: hidden;
@@ -1104,10 +1104,7 @@
         text-align: center;
         color: #02E3FA;
         border-collapse: collapse;
-        position: relative;
-        top: 0;
-        -webkit-animation: scrollToUp 10s linear infinite; /* 引入 scrollToUp动画 */
-        animation: scrollToUp 10s linear infinite;
+        table-layout: fixed;
     }
 
     .leftMidMask table th{
@@ -1265,14 +1262,27 @@
         text-align: center;
         color: #02E3FA;
         border-collapse: collapse;
-        position: relative;
-        top: 0;
-        -webkit-animation: scrollToUp 10s linear infinite; /* 引入 scrollToUp动画 */
-        animation: scrollToUp 10s linear infinite;
+        table-layout: fixed;
     }
 
     .rightTopRight table td {
         border-bottom: 1px dashed #7F9EBA;
+    }
+
+    .rightTopRight table th:first-child{
+        width: 60px;
+    }
+
+    .rightTopRight table th:nth-child(3), .rightTopRight table th:nth-child(4){
+        width: 70px;
+    }
+
+    .rightTopRight table td:first-child{
+        width: 60px;
+    }
+
+    .rightTopRight table td:nth-child(3),.rightTopRight table td:nth-child(4){
+        width: 70px;
     }
 
     .rightMid{
@@ -1348,6 +1358,26 @@
         text-align: center;
         color: #02E3FA;
         border-collapse: collapse;
+        table-layout: fixed;
+    }
+
+    .rightMidRight table th:first-child{
+        width: 60px;
+    }
+
+    .rightMidRight table th:nth-child(3), .rightMidRight table th:nth-child(4){
+        width: 70px;
+    }
+
+    .rightMidRight table td:first-child{
+        width: 60px;
+    }
+
+    .rightMidRight table td:nth-child(3),.rightMidRight table td:nth-child(4){
+        width: 70px;
+    }
+
+    .tableScrollAnimation{
         position: relative;
         top: 0;
         -webkit-animation: scrollToUp 10s linear infinite; /* 引入 scrollToUp动画 */

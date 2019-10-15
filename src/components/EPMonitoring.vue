@@ -141,17 +141,6 @@
                                     </table>
                                 </div>
                                 <table :class="{'tableScrollAnimation': EntryPersonnelMonitoringData.approachPerson.length>=10}">
-                                    <thead style="opacity: 0">
-                                        <tr>
-                                            <th>序号</th>
-                                            <th>隶属项目</th>
-                                            <th>姓名</th>
-                                            <th>岗位</th>
-                                            <th>证书编号</th>
-                                            <th>签发时间</th>
-                                            <th>有效期</th>
-                                        </tr>
-                                    </thead>
                                     <tbody>
                                         <tr v-for="(data,i) in EntryPersonnelMonitoringData.approachPerson" :value="data.F_StaffName" :key="i">
                                             <td>{{i++}}</td>
@@ -1131,6 +1120,7 @@
         text-align: center;
         color: #02E3FA;
         border-collapse: collapse;
+        table-layout: fixed;
     }
 
     .tableScrollAnimation{
@@ -1144,8 +1134,16 @@
         padding: 0 15px;
     }
 
+    .rightTopFrameRight table th:first-child{
+        width: 70px;
+    }
+
     .rightTopFrameRight table td {
         border-bottom: 1px dashed #7F9EBA;
+    }
+
+    .rightTopFrameRight table td:first-child{
+        width: 70px;
     }
 
     /*table滚动动画*/
