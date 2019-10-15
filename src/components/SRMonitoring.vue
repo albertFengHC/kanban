@@ -111,7 +111,7 @@
                                 <tr v-for="(data,i) in tableData" :value="data.project" :key="i">
                                     <td>{{data.project}}</td>
                                     <td>{{data.name}}</td>
-                                    <td>{{data.post}}</td>
+                                    <td>{{i}}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -458,25 +458,25 @@
                 riskDangerData: '',
                 saveStorageData: '',
                 tableData:[
-                    {project:'001',name:'001',post:'001',certificate:'001',time:'001',date:'001'},
-                    {project:'002',name:'002',post:'002',certificate:'002',time:'002',date:'002'},
-                    {project:'003',name:'003',post:'003',certificate:'003',time:'003',date:'003'},
-                    {project:'001',name:'001',post:'001',certificate:'001',time:'001',date:'001'},
-                    {project:'001',name:'001',post:'001',certificate:'001',time:'001',date:'001'},
-                    {project:'001',name:'001',post:'001',certificate:'001',time:'001',date:'001'},
-                    {project:'001',name:'001',post:'001',certificate:'001',time:'001',date:'001'},
-                    {project:'001',name:'001',post:'001',certificate:'001',time:'001',date:'001'},
-                    {project:'001',name:'001',post:'001',certificate:'001',time:'001',date:'001'},
-                    {project:'001',name:'001',post:'001',certificate:'001',time:'001',date:'001'},
-                    {project:'001',name:'001',post:'001',certificate:'001',time:'001',date:'001'},
-                    {project:'001',name:'001',post:'001',certificate:'001',time:'001',date:'001'},
-                    {project:'001',name:'001',post:'001',certificate:'001',time:'001',date:'001'},
-                    {project:'001',name:'001',post:'001',certificate:'001',time:'001',date:'001'},
-                    {project:'001',name:'001',post:'001',certificate:'001',time:'001',date:'001'},
-                    {project:'001',name:'001',post:'001',certificate:'001',time:'001',date:'001'},
-                    {project:'001',name:'001',post:'001',certificate:'001',time:'001',date:'001'},
-                    {project:'001',name:'001',post:'001',certificate:'001',time:'001',date:'001'},
-                    {project:'001',name:'001',post:'001',certificate:'001',time:'001',date:'001'},
+                    {project:'易燃物',name:'2019-09-29',post:'001',certificate:'001',time:'001',date:'001'},
+                    {project:'吊篮',name:'2019-09-29',post:'002',certificate:'002',time:'002',date:'002'},
+                    {project:'无证上岗',name:'2019-09-29',post:'003',certificate:'003',time:'003',date:'003'},
+                    {project:'幽闭空间',name:'2019-09-29',post:'001',certificate:'001',time:'001',date:'001'},
+                    {project:'化学物品',name:'2019-09-29',post:'001',certificate:'001',time:'001',date:'001'},
+                    {project:'高压电',name:'2019-09-29',post:'001',certificate:'001',time:'001',date:'001'},
+                    {project:'空压机',name:'2019-09-29',post:'001',certificate:'001',time:'001',date:'001'},
+                    {project:'违规操作',name:'2019-09-29',post:'001',certificate:'001',time:'001',date:'001'},
+                    {project:'易爆品',name:'2019-09-29',post:'001',certificate:'001',time:'001',date:'001'},
+                    {project:'高边坡',name:'2019-09-29',post:'001',certificate:'001',time:'001',date:'001'},
+                    {project:'高压机',name:'2019-09-29',post:'001',certificate:'001',time:'001',date:'001'},
+                    {project:'幽闭空间',name:'2019-09-29',post:'001',certificate:'001',time:'001',date:'001'},
+                    {project:'无证上岗',name:'2019-09-29',post:'001',certificate:'001',time:'001',date:'001'},
+                    {project:'吊篮',name:'2019-09-29',post:'001',certificate:'001',time:'001',date:'001'},
+                    {project:'化学物品',name:'2019-09-29',post:'001',certificate:'001',time:'001',date:'001'},
+                    {project:'易燃物',name:'2019-09-29',post:'001',certificate:'001',time:'001',date:'001'},
+                    {project:'高边坡',name:'2019-09-29',post:'001',certificate:'001',time:'001',date:'001'},
+                    {project:'易爆品',name:'2019-09-29',post:'001',certificate:'001',time:'001',date:'001'},
+                    {project:'高压电',name:'2019-09-29',post:'001',certificate:'001',time:'001',date:'001'},
                 ],
                 MaskTrigger:true,
                 maskShowTrigger:false
@@ -840,7 +840,7 @@
                     quarterStr: this.mapData.valSeason,
                 };
                 // 发送 POST 请求
-                this.$getUrlSR('getSafetyRisk.do', parameter)
+                this.$getUrlEP('getSafetyRisk.do', parameter)
                     .then(function (response) {
                         console.log(response);
                         let data = response;
@@ -880,7 +880,7 @@
                     quarterStr: this.mapData.valSeason,
                 };
                 // 发送 POST 请求
-                this.$getUrlSR('getRiskDanger.do', parameter)
+                this.$getUrlEP('getRiskDanger.do', parameter)
                     .then(function (data) {
                         console.log(data);
                         that.RiskHandlingInformationStatisticsData.riskDanger = data.riskDanger[0];
@@ -1237,11 +1237,6 @@
         border-radius: 5px;
         color: #02E3FA;
     }
-
-    /*.rightTopRight i:nth-child(2){*/
-    /*    color: #fff;*/
-    /*    background-color: #164989;*/
-    /*}*/
 
     .rightTopRight .tableFrame{
         height: 100%;

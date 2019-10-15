@@ -36,23 +36,6 @@ export function getUrlEP(url ,parameter){
     })
 }
 
-//安全风险监控
-export function getUrlSR(url ,parameter){
-    return new Promise((resolve,reject) => {
-        axios({
-            method: 'post',
-            url: baseUrl+'ScreenPerson/' + url,
-            data: parameter
-        })
-            .then(response => {
-                resolve(response.data.data);
-            })
-            .catch(function (error) {
-                // console.log(error);
-            });
-    })
-}
-
 export function getUrlHome(url ,parameter){
     return new Promise((resolve,reject) => {
         axios({

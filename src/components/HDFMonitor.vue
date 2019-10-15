@@ -17,79 +17,81 @@
                 </p>
             </div>
             <div class="left">
-                <div class="leftTop">
-                    <div class="dateShow">
-                        <p>2019年9月16日</p>
-                        <p>星期二</p>
-                        <p>晴</p>
-                    </div>
-                    <div class="search">
-                        <div class="searchLeft">
-                            <div class="searchLeftLeft">
-                                <select name="" id="company" v-model="mapData.valCompany" @change="selCompany($event)">
-                                    <option value="">公司或分子公司选择</option>
-                                    <option v-for="option in sellCompanyData" :value="option.value" :key="option.value">
-                                        {{ option.text }}
-                                    </option>
-                                </select>
-                                <select name="" id="province" v-model="mapData.valProvince" @change="changeProject">
-                                    <option value="">省份选择</option>
-                                    <option v-for="option in selProvinceData" :value="option.value" :key="option.value">
-                                        {{ option.text }}
-                                    </option>
-                                </select>
-                                <select name="" id="project" v-model="mapData.valProject" @change="selCompany($event)">
-                                    <option value="">指挥部(项目公司)选择</option>
-                                    <option v-for="option in selProjectData" :value="option.F_CompanyId"
-                                            :key="option.F_CompanyId">
-                                        {{ option.F_FullName }}
-                                    </option>
-                                </select>
+                <div class="leftTopFrame">
+                    <div class="leftTop">
+                        <div class="dateShow">
+                            <p>2019年9月16日</p>
+                            <p>星期二</p>
+                            <p>晴</p>
+                        </div>
+                        <div class="search">
+                            <div class="searchLeft">
+                                <div class="searchLeftLeft">
+                                    <select name="" id="company" v-model="mapData.valCompany" @change="selCompany($event)">
+                                        <option value="">公司或分子公司选择</option>
+                                        <option v-for="option in sellCompanyData" :value="option.value" :key="option.value">
+                                            {{ option.text }}
+                                        </option>
+                                    </select>
+                                    <select name="" id="province" v-model="mapData.valProvince" @change="changeProject">
+                                        <option value="">省份选择</option>
+                                        <option v-for="option in selProvinceData" :value="option.value" :key="option.value">
+                                            {{ option.text }}
+                                        </option>
+                                    </select>
+                                    <select name="" id="project" v-model="mapData.valProject" @change="selCompany($event)">
+                                        <option value="">指挥部(项目公司)选择</option>
+                                        <option v-for="option in selProjectData" :value="option.F_CompanyId"
+                                                :key="option.F_CompanyId">
+                                            {{ option.F_FullName }}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="searchLeftRight">
+                                    <select name="" id="segments" v-model="mapData.valSegments" @change="selCompany($event)">
+                                        <option value="">业务板块选择</option>
+                                        <option v-for="option in selSegmentsData" :value="option.value" :key="option.value">
+                                            {{ option.text }}
+                                        </option>
+                                    </select>
+                                    <select name="" id="contract" v-model="mapData.valContract"
+                                            @change="selCompany($event)">
+                                        <option value="">项目部选择</option>
+                                        <option v-for="option in selContractData" :value="option.F_CompanyId"
+                                                :key="option.F_CompanyId">
+                                            {{ option.F_ShortName }}
+                                        </option>
+                                    </select>
+                                </div>
                             </div>
-                            <div class="searchLeftRight">
-                                <select name="" id="segments" v-model="mapData.valSegments" @change="selCompany($event)">
-                                    <option value="">业务板块选择</option>
-                                    <option v-for="option in selSegmentsData" :value="option.value" :key="option.value">
+                            <img src="../assets/indexImg/图层30拷贝.png" alt="">
+                            <div>
+                                <button>统计周期</button>
+                                <select name="" id="year" v-model="mapData.valYear" @change="selCompany($event)">
+                                    <option value="">年份选择</option>
+                                    <option v-for="option in selYearData" :value="option.value" :key="option.value">
+                                        {{ option.text }}
+                                    </option>
+                                </select><i>年</i>
+                                <select name="" id="season" v-model="mapData.valSeason" @change="selCompany($event)">
+                                    <option value="">季度选择</option>
+                                    <option v-for="option in selSeasonData" :value="option.value" :key="option.value">
                                         {{ option.text }}
                                     </option>
                                 </select>
-                                <select name="" id="contract" v-model="mapData.valContract"
-                                        @change="selCompany($event)">
-                                    <option value="">项目部选择</option>
-                                    <option v-for="option in selContractData" :value="option.F_CompanyId"
-                                            :key="option.F_CompanyId">
-                                        {{ option.F_ShortName }}
+                                <select name="" id="month" v-model="mapData.valMonth" @change="selCompany($event)">
+                                    <option value="">月份选择</option>
+                                    <option v-for="option in selMonthData" :value="option.value" :key="option.value">
+                                        {{ option.text }}
                                     </option>
                                 </select>
                             </div>
                         </div>
-                        <img src="../assets/indexImg/图层30拷贝.png" alt="">
-                        <div>
-                            <button>统计周期</button>
-                            <select name="" id="year" v-model="mapData.valYear" @change="selCompany($event)">
-                                <option value="">年份选择</option>
-                                <option v-for="option in selYearData" :value="option.value" :key="option.value">
-                                    {{ option.text }}
-                                </option>
-                            </select><i>年</i>
-                            <select name="" id="season" v-model="mapData.valSeason" @change="selCompany($event)">
-                                <option value="">季度选择</option>
-                                <option v-for="option in selSeasonData" :value="option.value" :key="option.value">
-                                    {{ option.text }}
-                                </option>
-                            </select>
-                            <select name="" id="month" v-model="mapData.valMonth" @change="selCompany($event)">
-                                <option value="">月份选择</option>
-                                <option v-for="option in selMonthData" :value="option.value" :key="option.value">
-                                    {{ option.text }}
-                                </option>
-                            </select>
-                        </div>
                     </div>
-                </div>
-                <div class="leftMid">
-                    <myMap :msg='mapData' ref="map" class="myMap"/>
-<!--                    <div ref="mapFrame" class="mapFrame"></div>-->
+                    <div class="leftMid">
+                        <myMap :msg='mapData' ref="map" class="myMap"/>
+                        <!--                    <div ref="mapFrame" class="mapFrame"></div>-->
+                    </div>
                 </div>
                 <div class="leftBottom">
                     <div class="leftBottomLeft">
@@ -182,26 +184,15 @@
                                         </thead>
                                     </table>
                                 </div>
-                                <table>
-                                    <thead style="opacity: 0">
-                                        <tr>
-                                            <th>序号</th>
-                                            <th>隶属项目</th>
-                                            <th>设备名称</th>
-                                            <th>部位</th>
-                                            <th>预警描述</th>
-                                            <th>发生时间</th>
-                                            <th>监控</th>
-                                        </tr>
-                                    </thead>
+                                <table :class="{'tableScrollAnimation': HDSGCUSNData.length>=15}">
                                     <tbody>
-                                        <tr v-for="(data,i) in tableData" :value="data.project" :key="i">
+                                        <tr v-for="(data,i) in HDSGCUSNData" :value="HDSGCUSNData.F_Id" :key="i" @click="getDIHDUSNData($event)">
                                             <td>{{i++}}</td>
-                                            <td>{{data.project}}</td>
-                                            <td>{{data.name}}</td>
-                                            <td>{{data.post}}</td>
-                                            <td>{{data.certificate}}</td>
-                                            <td>{{data.time}}</td>
+                                            <td>{{data.F_CompanyName}}</td>
+                                            <td>{{data.F_CheckDate}}</td>
+                                            <td>{{data.F_PassiveName}}</td>
+                                            <td>{{data.F_TrapType}}</td>
+                                            <td>{{data.F_LastDate}}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -294,6 +285,7 @@
         },
         data() {
             return {
+                HDSGCUSNData:'',
                 trapDailyData:'',
                 trapDailyLevelData:'',
                 mapData: {
@@ -362,29 +354,6 @@
                     {text: '十一月', value: '十一月'},
                     {text: '十二月', value: '十二月'},
                 ],
-                riskDangerData: '',
-                saveStorageData: '',
-                tableData:[
-                    {project:'001',name:'001',post:'001',certificate:'001',time:'001',date:'001'},
-                    {project:'002',name:'002',post:'002',certificate:'002',time:'002',date:'002'},
-                    {project:'003',name:'003',post:'003',certificate:'003',time:'003',date:'003'},
-                    {project:'001',name:'001',post:'001',certificate:'001',time:'001',date:'001'},
-                    {project:'001',name:'001',post:'001',certificate:'001',time:'001',date:'001'},
-                    {project:'001',name:'001',post:'001',certificate:'001',time:'001',date:'001'},
-                    {project:'001',name:'001',post:'001',certificate:'001',time:'001',date:'001'},
-                    {project:'001',name:'001',post:'001',certificate:'001',time:'001',date:'001'},
-                    {project:'001',name:'001',post:'001',certificate:'001',time:'001',date:'001'},
-                    {project:'001',name:'001',post:'001',certificate:'001',time:'001',date:'001'},
-                    {project:'001',name:'001',post:'001',certificate:'001',time:'001',date:'001'},
-                    {project:'001',name:'001',post:'001',certificate:'001',time:'001',date:'001'},
-                    {project:'001',name:'001',post:'001',certificate:'001',time:'001',date:'001'},
-                    {project:'001',name:'001',post:'001',certificate:'001',time:'001',date:'001'},
-                    {project:'001',name:'001',post:'001',certificate:'001',time:'001',date:'001'},
-                    {project:'001',name:'001',post:'001',certificate:'001',time:'001',date:'001'},
-                    {project:'001',name:'001',post:'001',certificate:'001',time:'001',date:'001'},
-                    {project:'001',name:'001',post:'001',certificate:'001',time:'001',date:'001'},
-                    {project:'001',name:'001',post:'001',certificate:'001',time:'001',date:'001'},
-                ]
             }
         },
         methods:{
@@ -395,6 +364,7 @@
                 this.getContractVal(this.mapData.valProject);
                 this.changeSeasonMonth(e);
                 this.$refs.map.getRouteData(this.mapData.valContract === '' ? this.mapData.valProject : this.mapData.valContract);
+                this.getHDSGCUSNData();
                 this.getAllData();
             },
             getProjectVal() {
@@ -467,67 +437,38 @@
             },
             changeProject() {
                 this.$refs.map.mapProvinceShow(this.mapData.valProvince);
-                this.getAllData();
             },
-            // map() {
-            //     let map = new AMap.Map(this.$refs.mapFrame, {
-            //         resizeEnable: true, //是否监控地图容器尺寸变化
-            //         zoom: 11, //初始化地图层级
-            //         center: [112.822591, 37.91608], //初始化地图中心点
-            //         mapStyle: 'amap://styles/52787a3119fdf6e3d0d9fe858462deb0',
-            //     });
-            //
-            //     let markers = [];
-            //
-            //     const that = this;
-            //
-            //     that.riskDangerData.map(data => {
-            //         // 创建点实例
-            //         let marker = new AMap.Marker({
-            //             position: new AMap.LngLat(data.F_Longitude, data.F_Latitude),
-            //             icon: new AMap.Icon({
-            //                 image: require('../assets/indexImg/地图图标2/重大危险源（未完工）.png'),
-            //                 size: new AMap.Size(32, 42),  //图标大小
-            //                 imageSize: new AMap.Size(32, 42)
-            //             }),
-            //             offset: new AMap.Pixel(-13, -30)
-            //         });
-            //
-            //         markers.push(marker);
-            //     });
-            //     that.saveStorageData.map(data => {
-            //         // 创建点实例
-            //         let marker = new AMap.Marker({
-            //             position: new AMap.LngLat(data.F_Longitude, data.F_Latitude),
-            //             icon: new AMap.Icon({
-            //                 image: require('../assets/indexImg/地图图标2/应急物资存放地.png'),
-            //                 size: new AMap.Size(32, 42),  //图标大小
-            //                 imageSize: new AMap.Size(32, 42)
-            //             }),
-            //             offset: new AMap.Pixel(-13, -30)
-            //         });
-            //
-            //         markers.push(marker);
-            //     });
-            //
-            //     const overlayGroups = new AMap.OverlayGroup(markers);
-            //
-            //     map.add(overlayGroups);
-            // },
-            getData() {
+            getHDSGCUSNData() {
                 const that = this;
                 const parameter = {
-                    companyId: '',
-                    yearStr: '',
-                    monthStr: '',
-                    quarterStr: '',
+                    companyId: this.mapData.valContract === '' ? this.mapData.valProject : this.mapData.valContract,
+                    yearStr: this.mapData.valYear,
+                    monthStr: this.mapData.valMonth,
+                    quarterStr: this.mapData.valSeason,
                 };
                 // 发送 POST 请求
-                this.$getUrl('getMapMessage.do', parameter)
-                    .then(function (response) {
-                        that.riskDangerData = response.riskDangerData;
-                        that.saveStorageData = response.saveStorageData;
-                        // that.map();
+                this.$getUrlEP('getRecordRectify.do', parameter)
+                    .then(function (data) {
+                        that.HDSGCUSNData = data.recordRectify;
+                        console.log(that.HDSGCUSNData);
+                    })
+                    .catch(function (error) {
+
+                    });
+            },
+            getDIHDUSNData(e){
+                console.log(e.target);
+                const that = this;
+                const parameter = {
+                    companyId: this.mapData.valContract === '' ? this.mapData.valProject : this.mapData.valContract,
+                    yearStr: this.mapData.valYear,
+                    monthStr: this.mapData.valMonth,
+                    quarterStr: this.mapData.valSeason,
+                };
+                // 发送 POST 请求
+                this.$getUrlEP('getRecordRectifyByFid.do', parameter)
+                    .then(function (data) {
+                        console.log(data);
                     })
                     .catch(function (error) {
 
@@ -734,12 +675,13 @@
                     .catch(function (error) {
                         // console.log(error);
                     });
-            }
+            },
+
         },
         mounted() {
             this.getProjectVal();
             this.getContractVal();
-            this.getData();
+            this.getHDSGCUSNData();
             this.getAllData();
         }
     }
@@ -778,6 +720,13 @@
     .left{
         width: 54%;
         position: relative;
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+    }
+
+    .leftTopFrame{
+        flex: 3;
         display: flex;
         justify-content: space-between;
         flex-direction: column;
@@ -889,6 +838,7 @@
         display: flex;
         justify-content: space-between;
         padding-top: 15px;
+        flex: 1;
     }
 
     .leftBottomLeft,.leftBottomRight{
@@ -1073,6 +1023,30 @@
         text-align: center;
         color: #02E3FA;
         border-collapse: collapse;
+        table-layout: fixed;
+    }
+
+    .rightTopRight table th:first-child{
+        width: 60px;
+    }
+
+    .rightTopRight table th:nth-child(3), .rightTopRight table td:nth-child(3){
+        width: 90px;
+    }
+
+    .rightTopRight table th:nth-child(5), .rightTopRight table td:nth-child(5){
+        width: 70px;
+    }
+
+    .rightTopRight table th:last-child,.rightTopRight table td:last-child{
+        width: 90px;
+    }
+
+    .rightTopRight table td:first-child{
+        width: 60px;
+    }
+
+    .tableScrollAnimation{
         position: relative;
         top: 0;
         -webkit-animation: scrollToUp 10s linear infinite; /* 引入 scrollToUp动画 */
@@ -1081,6 +1055,14 @@
 
     .rightTopRight table td {
         border-bottom: 1px dashed #7F9EBA;
+    }
+
+    .rightTopRight table th:first-child{
+        width: 60px;
+    }
+
+    .rightTopRight table td:first-child{
+        width: 60px;
     }
 
     .rightMidLeft img{

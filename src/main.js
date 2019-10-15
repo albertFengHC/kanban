@@ -3,14 +3,13 @@ import App from './App.vue'
 import router from './route/router'
 import iView from 'iview';
 import 'iview/dist/styles/iview.css';
-import {getUrl,getUrlHome,getUrlEP,getUrlSR} from './../public/urlBase';
+import {getUrl,getUrlHome,getUrlEP} from './../public/urlBase';
 // import BaiduMap from 'vue-baidu-map'
 
 Vue.use(iView);
 
 Vue.prototype.$getUrl=getUrl;
 Vue.prototype.$getUrlEP=getUrlEP;
-Vue.prototype.$getUrlSR=getUrlSR;
 Vue.prototype.$getUrlHome=getUrlHome;
 
 // Vue.use(BaiduMap, {

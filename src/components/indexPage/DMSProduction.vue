@@ -4,15 +4,15 @@
         <div class="TContent">
             <div>
                 <p>应急机构总数</p>
-                <p>{{lrSaveDrilling.saveOrg}}</p>
+                <p>{{lrSaveDrilling[0].mainPlatform}}</p>
             </div>
             <div>
                 <p>应急救援人员总数</p>
-                <p>{{lrSaveDrilling.savePerson}}</p>
+                <p>{{lrSaveDrilling[1].mainPlatform}}</p>
             </div>
             <div>
                 <p>应急演练次数</p>
-                <p>{{lrSaveDrilling.saveDrilling}}</p>
+                <p>{{lrSaveDrilling[2].mainPlatform}}</p>
             </div>
         </div>
         <div class="BContent">
@@ -74,9 +74,9 @@
                 // 发送 POST 请求
                 this.$getUrl('getLrSaveDrilling.do', parameter)
                     .then(function (response) {
-                        // console.log(response);
+                        console.log(response);
                         that.lrSaveDrilling = '';
-                        that.lrSaveDrilling = response.lrSaveDrilling[0];
+                        that.lrSaveDrilling = response.lrSaveDrilling;
                     })
                     .catch(function (error) {
                         // console.log(error);
