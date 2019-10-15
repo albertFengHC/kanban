@@ -15,9 +15,9 @@ module.exports = {
         //韩磊
         // host:'192.168.2.166',
         //服务器
-        host:'129.28.66.56',
-        // host: 'localhost',
-        port: 8088,
+        // host:'129.28.66.56',
+        host: 'localhost',
+        port: 8080,
         https: false,
         hotOnly: false,
         // 查阅 https://github.com/vuejs/vue-doc-zh-cn/vue-cli/cli-service.md#配置代理
