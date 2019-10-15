@@ -101,11 +101,11 @@
                                     <div class="rightTopFrameLeftFrame">
                                         <div class="rightTopFrameLeftImg">
                                             <img src="./../assets/EPMonitoringImg/菱形图片背景黄.png" alt="">
-                                            <span>0</span>
+                                            <span>{{EntryPersonnelMonitoringData.approachPersonNum.staffYellow}}</span>
                                         </div>
                                         <div class="rightTopFrameLeftImg">
                                             <img src="./../assets/EPMonitoringImg/菱形图片背景红.png" alt="">
-                                            <span>0</span>
+                                            <span>{{EntryPersonnelMonitoringData.approachPersonNum.staffRed}}</span>
                                         </div>
                                     </div>
                                     <p>管理人员预警</p>
@@ -114,11 +114,11 @@
                                     <div class="rightTopFrameLeftFrame">
                                         <div class="rightTopFrameLeftImg">
                                             <img src="./../assets/EPMonitoringImg/菱形图片背景黄.png" alt="">
-                                            <span>0</span>
+                                            <span>{{EntryPersonnelMonitoringData.approachPersonNum.LaborYellow}}</span>
                                         </div>
                                         <div class="rightTopFrameLeftImg">
                                             <img src="./../assets/EPMonitoringImg/菱形图片背景红.png" alt="">
-                                            <span>0</span>
+                                            <span>{{EntryPersonnelMonitoringData.approachPersonNum.LaborRed}}</span>
                                         </div>
                                     </div>
                                     <p>特种作业人员</p>
@@ -153,14 +153,14 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr v-for="(data,i) in tableData" :value="data.project" :key="i">
+                                        <tr v-for="(data,i) in EntryPersonnelMonitoringData.approachPerson" :value="data.F_StaffName" :key="i">
                                             <td>{{i++}}</td>
-                                            <td>{{data.name}}</td>
-                                            <td>{{data.post}}</td>
-                                            <td>{{data.post}}</td>
-                                            <td>{{data.post}}</td>
-                                            <td>{{data.post}}</td>
-                                            <td>{{data.post}}</td>
+                                            <td>{{data.F_CompanyName}}</td>
+                                            <td>{{data.F_StaffName}}</td>
+                                            <td>{{data.F_WorkStationName}}</td>
+                                            <td>{{data.F_SafeLicenseNo}}</td>
+                                            <td>{{data.F_NewSignDate}}</td>
+                                            <td>{{data.F_LicenseAge}}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -174,21 +174,21 @@
                                 <div class="rightBottomFrameLabelDiv">
                                     <div class="EDLabel" ref="EDLabel"></div>
                                 </div>
-                                <h2>86%</h2>
+                                <h2>{{EntryPersonnelMonitoringData.percentage.threeCard}}%</h2>
                                 <p>三级教育卡发放率</p>
                             </div>
                             <div class="rightBottomFrameLabel">
                                 <div class="rightBottomFrameLabelDiv">
                                     <div class="SOLabel" ref="SOLabel"></div>
                                 </div>
-                                <h2>86%</h2>
+                                <h2>{{EntryPersonnelMonitoringData.percentage.special}}%</h2>
                                 <p>特种作业人员持证上岗率</p>
                             </div>
                             <div class="rightBottomFrameLabel">
                                 <div class="rightBottomFrameLabelDiv">
                                     <div class="SELabel" ref="SELabel"></div>
                                 </div>
-                                <h2>86%</h2>
+                                <h2>{{EntryPersonnelMonitoringData.percentage.record}}%</h2>
                                 <p>参加安全教育培训学时达标率</p>
                             </div>
                         </div>
@@ -220,6 +220,15 @@
         },
         data() {
             return {
+                EntryPersonnelMonitoringData:{
+                    percentage: '',
+                    approachPerson: '',
+                    approachPersonNum: ''
+                },
+                admission: [],
+                appearance: [],
+                termData: '',
+                allA: [],
                 mapData: {
                     valCompany: '',
                     valProvince: '',
@@ -286,29 +295,6 @@
                     {text: '十一月', value: '十一月'},
                     {text: '十二月', value: '十二月'},
                 ],
-                riskDangerData: '',
-                saveStorageData: '',
-                tableData:[
-                    {project:'001',name:'001',post:'001',certificate:'001',time:'001',date:'001'},
-                    {project:'002',name:'002',post:'002',certificate:'002',time:'002',date:'002'},
-                    {project:'003',name:'003',post:'003',certificate:'003',time:'003',date:'003'},
-                    {project:'001',name:'001',post:'001',certificate:'001',time:'001',date:'001'},
-                    {project:'001',name:'001',post:'001',certificate:'001',time:'001',date:'001'},
-                    {project:'001',name:'001',post:'001',certificate:'001',time:'001',date:'001'},
-                    {project:'001',name:'001',post:'001',certificate:'001',time:'001',date:'001'},
-                    {project:'001',name:'001',post:'001',certificate:'001',time:'001',date:'001'},
-                    {project:'001',name:'001',post:'001',certificate:'001',time:'001',date:'001'},
-                    {project:'001',name:'001',post:'001',certificate:'001',time:'001',date:'001'},
-                    {project:'001',name:'001',post:'001',certificate:'001',time:'001',date:'001'},
-                    {project:'001',name:'001',post:'001',certificate:'001',time:'001',date:'001'},
-                    {project:'001',name:'001',post:'001',certificate:'001',time:'001',date:'001'},
-                    {project:'001',name:'001',post:'001',certificate:'001',time:'001',date:'001'},
-                    {project:'001',name:'001',post:'001',certificate:'001',time:'001',date:'001'},
-                    {project:'001',name:'001',post:'001',certificate:'001',time:'001',date:'001'},
-                    {project:'001',name:'001',post:'001',certificate:'001',time:'001',date:'001'},
-                    {project:'001',name:'001',post:'001',certificate:'001',time:'001',date:'001'},
-                    {project:'001',name:'001',post:'001',certificate:'001',time:'001',date:'001'},
-                ]
             }
         },
         methods:{
@@ -317,6 +303,8 @@
                 this.getContractVal(this.mapData.valProject);
                 this.changeSeasonMonth(e);
                 this.$refs.map.getRouteData(this.mapData.valContract === '' ? this.mapData.valProject : this.mapData.valContract);
+                this.getLabourForceData();
+                this.getEntryPersonnelMonitoringData();
             },
             getProjectVal() {
                 const that = this;
@@ -389,20 +377,63 @@
             changeProject() {
                 this.$refs.map.mapProvinceShow(this.mapData.valProvince);
             },
-            getData() {
+            getLabourForceData() {
                 const that = this;
                 const parameter = {
-                    companyId: '',
-                    yearStr: '',
-                    monthStr: '',
-                    quarterStr: '',
+                    companyId: this.mapData.valContract === '' ? this.mapData.valProject : this.mapData.valContract,
+                    yearStr: this.mapData.valYear,
+                    monthStr: this.mapData.valMonth,
+                    quarterStr: this.mapData.valSeason,
                 };
                 // 发送 POST 请求
-                this.$getUrl('getMapMessage.do', parameter)
-                    .then(function (response) {
-                        that.riskDangerData = response.riskDangerData;
-                        that.saveStorageData = response.saveStorageData;
-                        // that.map();
+                this.$getUrl('getTermLabor.do', parameter)
+                    .then(function (data) {
+                        that.admission = [];
+                        that.appearance = [];
+                        that.termData = '';
+                        that.termData = data.termdata[0];
+                        let allAData = '';
+
+                        for (let i in data.termMonthData[0]) {
+                            that.admission.push(data.termMonthData[0][i]);
+                        }
+
+                        for (let i in data.termMonthData[1]) {
+                            that.appearance.push(data.termMonthData[1][i]);
+                        }
+
+                        for (let i in data.termMonthData[0]) {
+                            allAData = data.termMonthData[0][i];
+                            allAData += data.termMonthData[1][i];
+                            that.allA.push(allAData);
+                        }
+
+                        that.ApproachPersonnelLineLabel();
+                        that.ApproachPersonnelCircleLabel();
+                    })
+                    .catch(function (error) {
+
+                    });
+            },
+            getEntryPersonnelMonitoringData(){
+                const that = this;
+                const parameter = {
+                    companyId: this.mapData.valContract === '' ? this.mapData.valProject : this.mapData.valContract,
+                    yearStr: this.mapData.valYear,
+                    monthStr: this.mapData.valMonth,
+                    quarterStr: this.mapData.valSeason,
+                };
+                // 发送 POST 请求
+                this.$getUrlEP('getApproachPerson.do', parameter)
+                    .then(function (data) {
+                        console.log(data);
+                        that.EntryPersonnelMonitoringData.percentage = data.percentage[0];
+                        that.EntryPersonnelMonitoringData.approachPerson = data.approachPerson;
+                        that.EntryPersonnelMonitoringData.approachPersonNum = data.approachPersonNum[0];
+
+                        that.creatEDLabel();
+                        that.creatSOLabel();
+                        that.creatSELabel();
                     })
                     .catch(function (error) {
 
@@ -423,7 +454,7 @@
                         orient: 'vertical',
                         x: 'right',
                         y: 'middle',
-                        data: ['三级教育卡发放率', '总计'],
+                        data: ['三级教育卡发放率', '剩余'],
                         textStyle: {
                             color: '#fff'
                         },
@@ -464,10 +495,10 @@
                                 }
                             },
                             data: [
-                                {value: 86, name: '三级教育卡发放率'},
-                                {value: 100-86, name: '总数'},
+                                {value: that.EntryPersonnelMonitoringData.percentage.threeCard, name: '三级教育卡发放率'},
+                                {value: 100-that.EntryPersonnelMonitoringData.percentage.threeCard, name: '剩余'},
                             ],
-                            color: ['#00B050','#FFC000']
+                            color: ['#03A4EC','#A5A5A5']
                         },
                     ]
                 };
@@ -489,7 +520,7 @@
                         orient: 'vertical',
                         x: 'right',
                         y: 'middle',
-                        data: ['三级教育卡发放率', '总计'],
+                        data: ['特种作业人员持证上岗率', '剩余'],
                         textStyle: {
                             color: '#fff'
                         },
@@ -507,7 +538,7 @@
                                     show: true,
                                     position: 'center',
                                     formatter:function (argument) {
-                                        let html='三级教育卡'+"\n"+'发放率';
+                                        let html='特种作业人员'+"\n"+'持证上岗率';
                                         return html;
                                     },
                                     textStyle:{
@@ -530,10 +561,10 @@
                                 }
                             },
                             data: [
-                                {value: 86, name: '三级教育卡发放率'},
-                                {value: 100-86, name: '总数'},
+                                {value: that.EntryPersonnelMonitoringData.percentage.special, name: '特种作业人员持证上岗率'},
+                                {value: 100-that.EntryPersonnelMonitoringData.percentage.special, name: '剩余'},
                             ],
-                            color: ['#00B050','#FFC000']
+                            color: ['#03A4EC','#A5A5A5']
                         },
                     ]
                 };
@@ -555,7 +586,7 @@
                         orient: 'vertical',
                         x: 'right',
                         y: 'middle',
-                        data: ['三级教育卡发放率', '总计'],
+                        data: ['安全教育培训学时达标率', '总计'],
                         textStyle: {
                             color: '#fff'
                         },
@@ -573,7 +604,7 @@
                                     show: true,
                                     position: 'center',
                                     formatter:function (argument) {
-                                        let html='三级教育卡'+"\n"+'发放率';
+                                        let html='安全教育培训'+"\n"+'学时达标率';
                                         return html;
                                     },
                                     textStyle:{
@@ -596,17 +627,17 @@
                                 }
                             },
                             data: [
-                                {value: 86, name: '三级教育卡发放率'},
-                                {value: 100-86, name: '总数'},
+                                {value: that.EntryPersonnelMonitoringData.percentage.record, name: '安全教育培训学时达标率'},
+                                {value: 100-that.EntryPersonnelMonitoringData.percentage.record, name: '剩余'},
                             ],
-                            color: ['#00B050','#FFC000']
+                            color: ['#03A4EC','#A5A5A5']
                         },
                     ]
                 };
                 // 绘制图表
                 myChart.setOption(option);
             },
-            creatCircleLabel() {
+            ApproachPersonnelCircleLabel() {
                 const that = this;
                 const echarts = require('echarts');
                 // 基于准备好的dom，初始化echarts实例
@@ -615,13 +646,13 @@
                 let option = {
                     tooltip: {
                         trigger: 'item',
-                        formatter: "{b}: {c}%"
+                        formatter: "{b}: {c}个"
                     },
                     legend: {
                         orient: 'vertical',
                         x: 'right',
                         y: 'middle',
-                        data: ['三级教育卡发放率', '总计'],
+                        data: ['管理技术人员', '普通劳务人员','特种作业人员'],
                         textStyle: {
                             color: '#fff'
                         },
@@ -639,7 +670,7 @@
                                     show: true,
                                     position: 'center',
                                     formatter:function (argument) {
-                                        let html='三级教育卡'+"\n"+'发放率';
+                                        let html='进场人员'+"\n"+'统计';
                                         return html;
                                     },
                                     textStyle:{
@@ -662,17 +693,19 @@
                                 }
                             },
                             data: [
-                                {value: 86, name: '三级教育卡发放率'},
-                                {value: 100-86, name: '总数'},
+                                {value: that.termData.technicianPerson, name: '管理技术人员'},
+                                {value: that.termData.presencePerson, name: '普通劳务人员'},
+                                {value: that.termData.specialPerson, name: '特种作业人员'},
                             ],
-                            color: ['#00B050','#FFC000']
+                            color: ['#4472C4','#A5A5A5','#FFC000']
                         },
                     ]
                 };
                 // 绘制图表
                 myChart.setOption(option);
             },
-            lineLabel() {
+            ApproachPersonnelLineLabel() {
+                const that = this;
                 const echarts = require('echarts');
                 // 基于准备好的dom，初始化echarts实例
                 const myChart = echarts.init(this.$refs.lineLabel);
@@ -770,7 +803,7 @@
                         {
                             name: '进场人员',
                             type: 'bar',
-                            data: [0,1,2,10,30,40,50,60,70,80,90,100],
+                            data: that.admission,
                             itemStyle: {
                                 normal: {
                                     //这里是重点
@@ -789,7 +822,7 @@
                         {
                             name: '出场人员',
                             type: 'bar',
-                            data: [0,1,2,10,30,40,50,60,70,80,90,100],
+                            data: that.appearance,
                             itemStyle: {
                                 normal: {
                                     //这里是重点
@@ -808,7 +841,7 @@
                         {
                             name:'在场人员总数',
                             type:'bar',
-                            data: [0,1,2,10,30,40,50,60,70,80,90,100],
+                            data: that.allA,
                             itemStyle: {
                                 normal: {
                                     //这里是重点
@@ -833,12 +866,8 @@
         mounted() {
             this.getProjectVal();
             this.getContractVal();
-            this.getData();
-            this.creatEDLabel();
-            this.creatSOLabel();
-            this.creatSELabel();
-            this.creatCircleLabel();
-            this.lineLabel();
+            this.getLabourForceData();
+            this.getEntryPersonnelMonitoringData();
         }
     }
 </script>
@@ -1159,7 +1188,7 @@
     }
 
     .rightBottomFrameLabel .rightBottomFrameLabelDiv{
-        height: 100px;
+        height: 130px;
     }
 
     .rightBottomFrameLabel h3{

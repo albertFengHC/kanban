@@ -19,6 +19,7 @@ export function getUrl(url ,parameter){
     })
 }
 
+//进场人员监控
 export function getUrlEP(url ,parameter){
     return new Promise((resolve,reject) => {
         axios({
@@ -35,6 +36,7 @@ export function getUrlEP(url ,parameter){
     })
 }
 
+//安全风险监控
 export function getUrlSR(url ,parameter){
     return new Promise((resolve,reject) => {
         axios({
