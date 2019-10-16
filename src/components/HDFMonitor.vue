@@ -186,7 +186,7 @@
                                 </div>
                                 <table :class="{'tableScrollAnimation': HDSGCUSNData.length>=15}">
                                     <tbody>
-                                        <tr v-for="(data,i) in HDSGCUSNData" :value="HDSGCUSNData.F_Id" :key="i" @click="getDIHDUSNData($event)">
+                                        <tr v-for="(data,i) in HDSGCUSNData" :value="data.F_Id" :key="i" @click="getDIHDUSNData(data.F_Id)">
                                             <td>{{i++}}</td>
                                             <td>{{data.F_CompanyName}}</td>
                                             <td>{{data.F_CheckDate}}</td>
@@ -202,71 +202,132 @@
                 </div>
                 <div class="rightBottom">
                     <div class="rightBottomTop">
-                        <i>隐患巡查情况</i>
-                        <i>隐患整改情况</i>
-                        <i>隐患复核情况</i>
+                        <i v-for="(data,i) in SE" :key="i" @click="SEquipment(i)" :class="{checkI:i === SEIsShow}">{{data}}</i>
                     </div>
                     <div class="rightBottomBottom">
-                        <table>
+                        <table v-show="SEIsShow === 0">
                             <tbody>
                                 <tr>
                                     <td>检查单位:</td>
-                                    <td class="tableRight"></td>
+                                    <td class="tableRight">{{DIHDUSNData.recordMessage.f_CompanyName}}</td>
                                     <td>检查记录编号:</td>
-                                    <td class="tableRight"></td>
+                                    <td class="tableRight">{{DIHDUSNData.recordMessage.f_TrapNo}}</td>
                                 </tr>
                                 <tr>
                                     <td>检查人:</td>
-                                    <td class="tableRight"></td>
+                                    <td class="tableRight">{{DIHDUSNData.recordMessage.f_CheckName}}</td>
                                     <td>检查时间:</td>
-                                    <td class="tableRight"></td>
+                                    <td class="tableRight">{{DIHDUSNData.recordMessage.f_CheckDate}}</td>
                                 </tr>
                                 <tr>
                                     <td>被检查单位:</td>
-                                    <td class="tableRight"></td>
+                                    <td class="tableRight">{{DIHDUSNData.recordMessage.f_PassiveName}}</td>
                                     <td>要求整改截止时间:</td>
-                                    <td class="tableRight"></td>
+                                    <td class="tableRight">{{DIHDUSNData.recordMessage.f_LastDate}}</td>
                                 </tr>
                                 <tr>
                                     <td>存在隐患工程名称:</td>
-                                    <td class="tableRight"></td>
+                                    <td class="tableRight" colspan="3">{{DIHDUSNData.recordMessage.f_DangerName}}</td>
                                 </tr>
                                 <tr>
                                     <td>坐标经度:</td>
-                                    <td class="tableRight"></td>
+                                    <td class="tableRight">{{DIHDUSNData.recordMessage.f_Longitude}}</td>
                                     <td>坐标纬度:</td>
-                                    <td class="tableRight"></td>
+                                    <td class="tableRight">{{DIHDUSNData.recordMessage.f_Latitude}}</td>
                                 </tr>
                                 <tr>
                                     <td>检查发问题:</td>
-                                    <td class="tableRight"></td>
+                                    <td class="tableRight" colspan="3"><button class="CheckIssueProblems" v-show="DIHDUSNData.recordMessageItem.length>=1" @click="CheckIssueProblemsDetail">点击查看</button></td><span v-show="DIHDUSNData.recordMessageItem.length === 0">无</span>
                                 </tr>
                                 <tr>
                                     <td>发现问题描述:</td>
-                                    <td class="tableRight"></td>
+                                    <td class="tableRight" colspan="3">{{DIHDUSNData.recordMessage.f_ProblemDesc}}</td>
                                 </tr>
                                 <tr>
                                     <td>整改要求:</td>
-                                    <td class="tableRight"></td>
+                                    <td class="tableRight" colspan="3">{{DIHDUSNData.recordMessage.f_RequireDesc}}</td>
                                 </tr>
                                 <tr>
                                     <td>排查工程对象:</td>
-                                    <td class="tableRight"></td>
+                                    <td class="tableRight">{{DIHDUSNData.recordMessage.f_TestObject}}</td>
                                     <td>隐患类别:</td>
-                                    <td class="tableRight"></td>
+                                    <td class="tableRight">{{DIHDUSNData.recordMessage.f_TrapClass}}</td>
                                 </tr>
                                 <tr>
                                     <td>隐患类型:</td>
-                                    <td class="tableRight"></td>
+                                    <td class="tableRight">{{DIHDUSNData.recordMessage.f_TrapType}}</td>
                                     <td>督办级别:</td>
-                                    <td class="tableRight"></td>
+                                    <td class="tableRight">{{DIHDUSNData.recordMessage.f_TrapClass}}</td>
                                 </tr>
                                 <tr>
                                     <td>整改责任人:</td>
-                                    <td class="tableRight"></td>
+                                    <td class="tableRight">{{DIHDUSNData.recordMessage.f_AcceptName}}</td>
                                     <td>督办人:</td>
-                                    <td class="tableRight"></td>
+                                    <td class="tableRight">{{DIHDUSNData.recordMessage.f_ReadName}}</td>
                                 </tr>
+                            </tbody>
+                        </table>
+                        <table v-show="SEIsShow === 1">
+                            <tbody>
+                                <tr>
+                                    <td>整改记录编号:</td>
+                                    <td class="tableRight">{{DIHDUSNData.recordBack.f_BackNo}}</td>
+                                    <td>整改填报人:</td>
+                                    <td class="tableRight">{{DIHDUSNData.recordBack.f_RecordName}}</td>
+                                </tr>
+                                <tr>
+                                    <td>整改情况综述:</td>
+                                    <td class="tableRight" colspan="3">{{DIHDUSNData.recordBack.f_BackDesc}}</td>
+                                </tr>
+                                <tr>
+                                    <td>整改详细情况:</td>
+                                    <td class="tableRight" colspan="3">{{DIHDUSNData.recordBack.f_BackDetail}}</td>
+                                </tr>
+                                <tr>
+                                    <td>整改单位负责人:</td>
+                                    <td class="tableRight">{{DIHDUSNData.recordBack.f_PrincipalName}}</td>
+                                    <td>整改完成时间:</td>
+                                    <td class="tableRight">{{DIHDUSNData.recordBack.f_FinishDate}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table v-show="SEIsShow === 2">
+                            <tbody>
+                                <tr>
+                                    <td>复核验证人:</td>
+                                    <td class="tableRight">{{DIHDUSNData.recordReview.f_ReviewName}}</td>
+                                    <td>复核时间:</td>
+                                    <td class="tableRight">{{DIHDUSNData.recordReview.f_ReviewDate}}</td>
+                                </tr>
+                                <tr>
+                                    <td>复核意见:</td>
+                                    <td class="tableRight" colspan="3">{{DIHDUSNData.recordReview.f_Message}}</td>
+                                </tr>
+                                <tr>
+                                    <td>复核结果:</td>
+                                    <td class="tableRight" colspan="3">{{DIHDUSNData.recordReview.f_Status}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="CheckIssueProblemsTable" v-show="CheckIssueProblemsDetailShow">
+                        <h3>检查发问题</h3>
+                        <p @click="CheckIssueProblemsHide">X</p>
+                        <table>
+                            <div v-show="DIHDUSNData.recordMessageItem.length === 0">无信息</div>
+                            <thead>
+                            <tr>
+                                <th>项目编号</th>
+                                <th>隐患级别</th>
+                                <th>排查内容</th>
+                            </tr>
+                            </thead>
+                            <tbody v-show="DIHDUSNData.recordMessageItem.length>=1">
+                            <tr v-for="(data,i) in DIHDUSNData.recordMessageItem" :value="data.F_ItemNo" :key="i">
+                                <td>{{data.F_ItemNo}}</td>
+                                <td>{{data.F_TrapLevel}}</td>
+                                <td>{{data.F_ItemName}}</td>
+                            </tr>
                             </tbody>
                         </table>
                     </div>
@@ -285,6 +346,15 @@
         },
         data() {
             return {
+                CheckIssueProblemsDetailShow: false,
+                DIHDUSNData: {
+                    recordBack: '',
+                    recordMessage: '',
+                    recordReview: '',
+                    recordMessageItem: '',
+                },
+                SEIsShow: 0,
+                SE: ['隐患巡查情况','隐患整改情况','隐患复核情况'],
                 HDSGCUSNData:'',
                 trapDailyData:'',
                 trapDailyLevelData:'',
@@ -457,18 +527,20 @@
                     });
             },
             getDIHDUSNData(e){
-                console.log(e.target);
+                console.log(e);
                 const that = this;
                 const parameter = {
-                    companyId: this.mapData.valContract === '' ? this.mapData.valProject : this.mapData.valContract,
-                    yearStr: this.mapData.valYear,
-                    monthStr: this.mapData.valMonth,
-                    quarterStr: this.mapData.valSeason,
+                    fid: e,
                 };
                 // 发送 POST 请求
                 this.$getUrlEP('getRecordRectifyByFid.do', parameter)
                     .then(function (data) {
                         console.log(data);
+                        data.recordMessage === null?that.DIHDUSNData.recordMessage = '':that.DIHDUSNData.recordMessage = data.recordMessage;
+                        data.recordBack === null?that.DIHDUSNData.recordBack = '':that.DIHDUSNData.recordBack = data.recordBack;
+                        data.recordReview === null?that.DIHDUSNData.recordReview = '':that.DIHDUSNData.recordReview = data.recordReview;
+                        console.log(that.DIHDUSNData);
+                        data.recordMessageItem === null?that.DIHDUSNData.recordMessageItem = '':that.DIHDUSNData.recordMessageItem = data.recordMessageItem;
                     })
                     .catch(function (error) {
 
@@ -676,7 +748,15 @@
                         // console.log(error);
                     });
             },
-
+            SEquipment(e){
+                this.SEIsShow = e;
+            },
+            CheckIssueProblemsDetail(){
+                this.CheckIssueProblemsDetailShow = true;
+            },
+            CheckIssueProblemsHide(){
+                this.CheckIssueProblemsDetailShow = false;
+            }
         },
         mounted() {
             this.getProjectVal();
@@ -1135,8 +1215,8 @@
         margin: 0 15px;
     }
 
-    .rightBottomTop i:first-child{
-        color: #fff;
+    .checkI{
+        color: #fff !important;
         background-color: #164989;
     }
 
@@ -1154,6 +1234,17 @@
     .rightBottomBottom .tableRight{
         width: 35%;
         border-bottom: 1px dashed #7F9EBA;
+        text-align: start;
+        padding-left: 5px;
+    }
+
+    .CheckIssueProblems{
+        background-color: #0d1963;
+        color: #02E3FA;
+        padding: 0 5px;
+        border-radius: 5px;
+        border: 1px solid #02E3FA;
+        cursor: pointer;
     }
 
     @-webkit-keyframes scrollToUp {
@@ -1198,5 +1289,51 @@
 
     .myMap{
         padding: 0;
+    }
+
+    .CheckIssueProblemsTable{
+        position: absolute;
+        top: 40%;
+        left: 5%;
+        z-index: 10000;
+        background-color: #0d1963;
+        padding: 15px;
+        overflow-y: auto;
+        border: 1px dashed #2E75B6;
+        border-radius: 5px;
+    }
+
+    .CheckIssueProblemsTable table{
+        color: #02E3FA;
+        text-align: left;
+    }
+
+    .CheckIssueProblemsTable table th{
+        border-bottom: 1px dashed #7F9EBA;
+        padding: 0 5px;
+    }
+
+    .CheckIssueProblemsTable table td{
+        border-bottom: 1px dashed #7F9EBA;
+        padding: 0 5px;
+    }
+
+    .CheckIssueProblemsTable div{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .CheckIssueProblemsTable>p{
+        text-align: right;
+        font-weight: bold;
+        font-size: 20px;
+        color: #fff;
+        cursor: pointer;
+        padding-right: 15px;
+        padding-top: 10px;
+        position: absolute;
+        right: 0;
+        top: 0;
     }
 </style>
