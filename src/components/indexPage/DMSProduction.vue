@@ -29,24 +29,24 @@
                 <tbody>
                     <tr>
                         <td>应急机构总数</td>
-                        <td>7</td>
-                        <td>6</td>
-                        <td>8</td>
-                        <td>9</td>
+                        <td>{{lrSaveDrilling[0].sichuanPlatform}}</td>
+                        <td>{{lrSaveDrilling[0].yunnanPlatform}}</td>
+                        <td>{{lrSaveDrilling[0].guizhouPlatform}}</td>
+                        <td>{{lrSaveDrilling[0].xizangPlatform}}</td>
                     </tr>
                     <tr>
                         <td>应急救援人员总数</td>
-                        <td>28</td>
-                        <td>32</td>
-                        <td>26</td>
-                        <td>34</td>
+                        <td>{{lrSaveDrilling[1].sichuanPlatform}}</td>
+                        <td>{{lrSaveDrilling[1].yunnanPlatform}}</td>
+                        <td>{{lrSaveDrilling[1].guizhouPlatform}}</td>
+                        <td>{{lrSaveDrilling[1].xizangPlatform}}</td>
                     </tr>
                     <tr>
                         <td>应急演练次数</td>
-                        <td>15</td>
-                        <td>15</td>
-                        <td>12</td>
-                        <td>13</td>
+                        <td>{{lrSaveDrilling[2].sichuanPlatform}}</td>
+                        <td>{{lrSaveDrilling[2].yunnanPlatform}}</td>
+                        <td>{{lrSaveDrilling[2].guizhouPlatform}}</td>
+                        <td>{{lrSaveDrilling[2].xizangPlatform}}</td>
                     </tr>
                 </tbody>
             </table>
@@ -73,10 +73,10 @@
                 };
                 // 发送 POST 请求
                 this.$getUrl('getLrSaveDrilling.do', parameter)
-                    .then(function (response) {
-                        console.log(response);
+                    .then(function (data) {
+                        console.log(data);
                         that.lrSaveDrilling = '';
-                        that.lrSaveDrilling = response.lrSaveDrilling;
+                        that.lrSaveDrilling = data.lrSaveDrilling;
                     })
                     .catch(function (error) {
                         // console.log(error);
