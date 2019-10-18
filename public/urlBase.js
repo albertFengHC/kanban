@@ -8,7 +8,7 @@ export function getUrl(url ,parameter){
         axios({
             method: 'post',
             url: baseUrl+'Screen/' + url,
-            data: parameter
+            data: parameter,
         })
             .then(response => {
                 resolve(response.data.data);
@@ -25,7 +25,7 @@ export function getUrlEP(url ,parameter){
         axios({
             method: 'post',
             url: baseUrl+'ScreenPerson/' + url,
-            data: parameter
+            data: parameter,
         })
             .then(response => {
                 resolve(response.data.data);
@@ -41,7 +41,7 @@ export function getUrlHome(url ,parameter){
         axios({
             method: 'post',
             url: baseUrl+'home/' + url,
-            data: parameter
+            data: parameter,
         })
             .then(response => {
                 resolve(response.data.data);
