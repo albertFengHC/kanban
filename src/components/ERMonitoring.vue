@@ -195,7 +195,7 @@
                                 </div>
                             </div>
                             <div class="rightTopLeftFrameRight">
-                                <div ref="label" class="label"></div>
+                                <div ref="labelPie" class="labelPie"></div>
                             </div>
                         </div>
                     </div>
@@ -333,28 +333,29 @@
                     </div>
                 </div>
                 <div class="rightBottom">
-                    <div class="rightBottomTop">
-                        <i v-for="(data,i) in DBPList" :key="i" @click="DBProject(i)" :class="{checkI:i === DBPIsShow}">{{data}}</i>
-                    </div>
-                    <div class="rightBottomBottom">
-                        <div class="rightBottomBottomTableTitle">
-                            <table>
-                                <thead>
-                                <tr>
-                                    <th>序号</th>
-                                    <th>报送单位</th>
-                                    <th>发生时间</th>
-                                    <th>工程名称</th>
-                                    <th>时间部位</th>
-                                    <th>时间类别</th>
-                                    <th>快报时间</th>
-                                    <th>续报次数</th>
-                                </tr>
-                                </thead>
-                            </table>
+                    <div class="rightBottomFrame">
+                        <div class="rightBottomTop">
+                            <i v-for="(data,i) in DBPList" :key="i" @click="DBProject(i)" :class="{checkI:i === DBPIsShow}">{{data}}</i>
                         </div>
-                        <table :class="{'tableScrollAnimation': DetailsEmergencyQuickReportContinuationReportData.saveAccidentEndList.length>=15}">
-                            <tbody>
+                        <div class="rightBottomBottom">
+                            <div class="rightBottomBottomTableTitle">
+                                <table>
+                                    <thead>
+                                    <tr>
+                                        <th>序号</th>
+                                        <th>报送单位</th>
+                                        <th>发生时间</th>
+                                        <th>工程名称</th>
+                                        <th>时间部位</th>
+                                        <th>时间类别</th>
+                                        <th>快报时间</th>
+                                        <th>续报次数</th>
+                                    </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                            <table :class="{'tableScrollAnimation': DetailsEmergencyQuickReportContinuationReportData.saveAccidentEndList.length>=15}">
+                                <tbody>
                                 <tr v-for="(data,i) in (DBPIsShow === 0?DetailsEmergencyQuickReportContinuationReportData.saveAccidentEndList:DetailsEmergencyQuickReportContinuationReportData.saveAccidentIngList)" :value="data.F_EnginerName" :key="i">
                                     <td>{{i++}}</td>
                                     <td>{{data.F_CompanyName}}</td>
@@ -365,8 +366,9 @@
                                     <td>{{data.F_ReportTime}}</td>
                                     <td>{{data.reportNum}}</td>
                                 </tr>
-                            </tbody>
-                        </table>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -376,6 +378,7 @@
 
 <script>
     import myMap from '../components/indexPage/myMap.vue';
+    // import * as echarts from 'echarts';
     export default {
         name: "ERMonitoring",
         components: {
@@ -561,51 +564,99 @@
             creatLabel() {
                 const that = this;
                 const echarts = require('echarts');
+                console.log(echarts);
                 // 基于准备好的dom，初始化echarts实例
-                const myChart = echarts.init(this.$refs.label);
+                const myChart = echarts.init(this.$refs.labelPie);
+                console.log(myChart);
+
+                // let option = {
+                //     tooltip: {
+                //         trigger: 'item',
+                //         formatter: "{b}: {c}项"
+                //     },
+                //     legend: {
+                //         orient: 'vertical',
+                //         x: 'right',
+                //         y: 'middle',
+                //         data: ['处理完结数', '正在处理数'],
+                //         textStyle: {
+                //             color: '#fff'
+                //         },
+                //         show:false
+                //     },
+                //     series: [
+                //         {
+                //             // name: '访问来源',
+                //             type: 'pie',
+                //             radius: ['60%', '90%'],
+                //             center: ["50%", "50%"],
+                //             avoidLabelOverlap: false,
+                //             label: {
+                //                 normal: {
+                //                     show: true,
+                //                     position: 'center',
+                //                     formatter:function (argument) {
+                //                         let html='主平台应急'+"\n"+'事件统计';
+                //                         return html;
+                //                     },
+                //                     textStyle:{
+                //                         // fontSize: 15,
+                //                         color:'#fff'
+                //                     }
+                //                 },
+                //                 emphasis: {
+                //                     show: false,
+                //                     textStyle: {
+                //                         fontSize: '20',
+                //                         fontWeight: 'bold',
+                //                         color: '#fff',
+                //                     },
+                //                 }
+                //             },
+                //             labelLine: {
+                //                 normal: {
+                //                     show: false
+                //                 }
+                //             },
+                //             data: [
+                //                 {value: 30, name: '处理完结数'},
+                //                 {value: 50, name: '正在处理数'},
+                //                 // {value: that.EmergencyStatisticsData[1].mainPlatform, name: '处理完结数'},
+                //                 // {value: that.EmergencyStatisticsData[2].mainPlatform, name: '正在处理数'},
+                //             ],
+                //             color: ['#00B050','#FFC000']
+                //         },
+                //     ]
+                // };
 
                 let option = {
                     tooltip: {
                         trigger: 'item',
-                        formatter: "{b}: {c}项"
+                        formatter: "{a} <br/>{b}: {c} ({d}%)"
                     },
                     legend: {
                         orient: 'vertical',
-                        x: 'right',
-                        y: 'middle',
-                        data: ['处理完结数', '正在处理数'],
-                        textStyle: {
-                            color: '#fff'
-                        },
-                        show:false
+                        x: 'left',
+                        data:['直接访问','邮件营销','联盟广告','视频广告','搜索引擎'],
+                        show: false
                     },
                     series: [
                         {
-                            // name: '访问来源',
-                            type: 'pie',
-                            radius: ['60%', '90%'],
-                            center: ["50%", "50%"],
+                            name:'访问来源',
+                            type:'pie',
+                            radius: ['50%', '70%'],
                             avoidLabelOverlap: false,
                             label: {
                                 normal: {
-                                    show: true,
-                                    position: 'center',
-                                    formatter:function (argument) {
-                                        let html='主平台应急'+"\n"+'事件统计';
-                                        return html;
-                                    },
-                                    textStyle:{
-                                        // fontSize: 15,
-                                        color:'#fff'
-                                    }
+                                    show: false,
+                                    position: 'center'
                                 },
                                 emphasis: {
-                                    show: false,
+                                    show: true,
                                     textStyle: {
-                                        fontSize: '20',
-                                        fontWeight: 'bold',
-                                        color: '#fff',
-                                    },
+                                        fontSize: '30',
+                                        fontWeight: 'bold'
+                                    }
                                 }
                             },
                             labelLine: {
@@ -613,12 +664,14 @@
                                     show: false
                                 }
                             },
-                            data: [
-                                {value: that.EmergencyStatisticsData[1].mainPlatform, name: '处理完结数'},
-                                {value: that.EmergencyStatisticsData[2].mainPlatform, name: '正在处理数'},
-                            ],
-                            color: ['#00B050','#FFC000']
-                        },
+                            data:[
+                                {value:335, name:'直接访问'},
+                                {value:310, name:'邮件营销'},
+                                {value:234, name:'联盟广告'},
+                                {value:135, name:'视频广告'},
+                                {value:1548, name:'搜索引擎'}
+                            ]
+                        }
                     ]
                 };
                 // 绘制图表
@@ -635,7 +688,6 @@
                 // 发送 POST 请求
                 this.$getUrl('getLrSaveDrilling.do', parameter)
                     .then(function (data) {
-                        console.log(data.lrSaveDrilling);
                         that.lrSaveDrilling = data.lrSaveDrilling;
                     })
                     .catch(function (error) {
@@ -653,9 +705,7 @@
                 // 发送 POST 请求
                 this.$getUrlEP('getSaveAccident.do', parameter)
                     .then(function (data) {
-                        console.log(data.saveAccident);
                         that.EmergencyStatisticsData = data.saveAccident;
-                        that.creatLabel();
                     })
                     .catch(function (error) {
 
@@ -672,7 +722,6 @@
                 // 发送 POST 请求
                 this.$getUrlEP('getSaveAccidentList.do', parameter)
                     .then(function (data) {
-                        console.log(data);
                         that.DetailsEmergencyQuickReportContinuationReportData = data;
                     })
                     .catch(function (error) {
@@ -684,14 +733,14 @@
             },
         },
         mounted() {
+            this.creatLabel();
+        },
+        created() {
             this.getProjectVal();
             this.getContractVal();
             this.getAllData();
             this.getEmergencyStatisticsData();
             this.getDetailsEmergencyQuickReportContinuationReportData();
-        },
-        created() {
-
         }
     }
 </script>
@@ -733,6 +782,10 @@
         justify-content: space-between;
         flex-direction: column;
         padding-right: 10px;
+    }
+
+    .leftTop{
+        flex: 1;
     }
 
     .dateShow {
@@ -829,6 +882,7 @@
         background-size: 100% 100%;
         padding: 25px;
         position: relative;
+        flex: 5;
     }
 
     .mapFrame {
@@ -840,6 +894,7 @@
     .leftBottom{
         display: flex;
         justify-content: space-between;
+        flex: 2;
     }
 
     .leftBottomLeft,.leftBottomMid,.leftBottomRight{
@@ -898,6 +953,7 @@
 
     .right{
         width: 46%;
+        height: 100%;
         display: flex;
         justify-content: space-between;
         flex-direction: column;
@@ -908,6 +964,7 @@
         display: flex;
         justify-content: space-between;
         font-size: 12px;
+        flex: 1;
     }
 
     .rightTop .redMark{
@@ -933,7 +990,7 @@
     }
 
     .rightTopLeftFrameLeft{
-        flex: 1;
+        flex: 2;
         text-align: center;
         color: #02E3FA;
     }
@@ -954,12 +1011,10 @@
     }
 
     .rightTopLeftFrameRight{
-        flex: 1;
-        width: 100%;
-        height: 100%;
+        flex: 3;
     }
 
-    .label{
+    .labelPie{
         width: 100%;
         height: 100%;
     }
@@ -1017,9 +1072,17 @@
     .rightBottom{
         background: url('./../assets/ERMonitoringImg/应急时间快报详情.png') no-repeat;
         background-size: 100% 100%;
+        height: 100%;
         padding: 10px;
         padding-right: 30px;
         margin-left: 5px;
+        flex: 2;
+    }
+
+    .rightBottomFrame{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
         height: 100%;
     }
 
@@ -1049,17 +1112,20 @@
     }
 
     .rightBottomBottom{
-        height: 94%;
         overflow: hidden;
+        flex: 1;
+        position: relative;
+        z-index: 1000;
     }
 
     .rightBottomBottomTableTitle{
         background-color: #0D1963;
-        z-index: 1000;
+        z-index: 10000;
         padding: 10px 0;
         position: relative;
         top: -5px;
         text-align: center;
+        height: 40px;
     }
 
     .rightBottomBottom table{
@@ -1067,7 +1133,7 @@
         text-align: center;
         color: #02E3FA;
         border-collapse: collapse;
-        position: relative;
+        position: absolute;
         table-layout: fixed;
     }
 

@@ -853,6 +853,9 @@
             },
         },
         mounted() {
+
+        },
+        created() {
             this.getProjectVal();
             this.getContractVal();
             this.getLabourForceData();
@@ -896,7 +899,6 @@
     .top{
         flex: 3;
         width: 100%;
-        height: 100%;
         display: flex;
         justify-content: space-between;
     }
@@ -909,6 +911,10 @@
         justify-content: space-between;
         flex-direction: column;
         padding-right: 10px;
+    }
+
+    .leftTop{
+        flex: 1;
     }
 
     .dateShow {
@@ -1005,6 +1011,7 @@
         background-size: 100% 100%;
         padding: 25px;
         position: relative;
+        flex: 5;
     }
 
     .titleJump{

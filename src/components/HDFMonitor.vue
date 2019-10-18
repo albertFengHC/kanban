@@ -759,6 +759,9 @@
             }
         },
         mounted() {
+
+        },
+        created() {
             this.getProjectVal();
             this.getContractVal();
             this.getHDSGCUSNData();

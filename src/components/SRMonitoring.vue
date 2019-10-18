@@ -901,16 +901,17 @@
             },
         },
         mounted() {
+            this.SafetyEarlyWarningMonitoringDangerousProjectsTableLength = this.$refs.tableFrameTable.rows.length;
+            this.SafetyEarlyWarningMonitoringSpecialEquipmentTableLength = this.$refs.rightMRTable.rows.length;
+        },
+        created() {
             this.getProjectVal();
             this.getContractVal();
             this.getData();
             this.getStatisticsStartInformationRiskSourcesData();
             this.getSRData();
             this.getRiskHandlingInformationStatisticsData();
-            console.log(this.$refs.rightMRTable.rows.length);
-            this.SafetyEarlyWarningMonitoringDangerousProjectsTableLength = this.$refs.tableFrameTable.rows.length;
-            this.SafetyEarlyWarningMonitoringSpecialEquipmentTableLength = this.$refs.rightMRTable.rows.length;
-        },
+        }
     }
 </script>
 
@@ -1024,7 +1025,7 @@
     }
 
     .search #company {
-        width: 74%;
+        width: 73%;
     }
 
     .search #project {
