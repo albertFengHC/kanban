@@ -143,7 +143,7 @@
                                 <table :class="{'tableScrollAnimation': EntryPersonnelMonitoringData.approachPerson.length>=10}">
                                     <tbody>
                                         <tr v-for="(data,i) in EntryPersonnelMonitoringData.approachPerson" :value="data.F_StaffName" :key="i">
-                                            <td>{{i++}}</td>
+                                            <td>{{++i}}</td>
                                             <td>{{data.F_CompanyName}}</td>
                                             <td>{{data.F_StaffName}}</td>
                                             <td>{{data.F_WorkStationName}}</td>

@@ -91,30 +91,30 @@
                     <myMap :msg='mapData' ref="map" class="myMap"/>
 <!--                    <div ref="mapFrame" class="mapFrame"></div>-->
                 </div>
-                <div class="leftBottom">
+                <div class="leftBottom" v-show="lrSaveDrilling">
                     <div class="leftBottomLeft">
                         <h4>应急机构信息统计</h4>
                         <div class="leftBottomLeftFrame">
                             <div class="leftBottomLeftFrameLeft">
                                 <p>应急机构总数</p>
-                                <p>{{lrSaveDrilling.saveOrg}}</p>
+                                <p>{{lrSaveDrilling[0].mainPlatform}}</p>
                             </div>
                             <div class="leftBottomLeftFrameRight">
                                 <div>
                                     <p>四川应急分平台</p>
-                                    <p><i>20</i>个</p>
+                                    <p><i>{{lrSaveDrilling[0].sichuanPlatform}}</i>个</p>
                                 </div>
                                 <div>
                                     <p>云南应急分平台</p>
-                                    <p><i>30</i>个</p>
+                                    <p><i>{{lrSaveDrilling[0].yunnanPlatform}}</i>个</p>
                                 </div>
                                 <div>
                                     <p>贵州应急分平台</p>
-                                    <p><i>10</i>个</p>
+                                    <p><i>{{lrSaveDrilling[0].guizhouPlatform}}</i>个</p>
                                 </div>
                                 <div>
                                     <p>西藏应急分平台</p>
-                                    <p><i>36</i>个</p>
+                                    <p><i>{{lrSaveDrilling[0].xizangPlatform}}</i>个</p>
                                 </div>
                             </div>
                         </div>
@@ -124,24 +124,24 @@
                         <div class="leftBottomMidFrame">
                             <div class="leftBottomMidFrameLeft">
                                 <p>应急人员总数</p>
-                                <p>{{lrSaveDrilling.savePerson}}</p>
+                                <p>{{lrSaveDrilling[1].mainPlatform}}</p>
                             </div>
                             <div class="leftBottomMidFrameRight">
                                 <div>
                                     <p>四川应急分平台</p>
-                                    <p><i>20</i>人</p>
+                                    <p><i>{{lrSaveDrilling[1].sichuanPlatform}}</i>人</p>
                                 </div>
                                 <div>
                                     <p>云南应急分平台</p>
-                                    <p><i>30</i>人</p>
+                                    <p><i>{{lrSaveDrilling[1].yunnanPlatform}}</i>人</p>
                                 </div>
                                 <div>
                                     <p>贵州应急分平台</p>
-                                    <p><i>10</i>人</p>
+                                    <p><i>{{lrSaveDrilling[1].guizhouPlatform}}</i>人</p>
                                 </div>
                                 <div>
                                     <p>西藏应急分平台</p>
-                                    <p><i>36</i>人</p>
+                                    <p><i>{{lrSaveDrilling[1].xizangPlatform}}</i>人</p>
                                 </div>
                             </div>
                         </div>
@@ -151,24 +151,24 @@
                         <div class="leftBottomRightFrame">
                             <div class="leftBottomRightFrameLeft">
                                 <p>应急演练总数</p>
-                                <p>{{lrSaveDrilling.saveOrg}}</p>
+                                <p>{{lrSaveDrilling[2].mainPlatform}}</p>
                             </div>
                             <div class="leftBottomRightFrameRight">
                                 <div>
                                     <p>四川应急分平台</p>
-                                    <p><i>20</i>次</p>
+                                    <p><i>{{lrSaveDrilling[2].sichuanPlatform}}</i>次</p>
                                 </div>
                                 <div>
                                     <p>云南应急分平台</p>
-                                    <p><i>30</i>次</p>
+                                    <p><i>{{lrSaveDrilling[2].yunnanPlatform}}</i>次</p>
                                 </div>
                                 <div>
                                     <p>贵州应急分平台</p>
-                                    <p><i>10</i>次</p>
+                                    <p><i>{{lrSaveDrilling[2].guizhouPlatform}}</i>次</p>
                                 </div>
                                 <div>
                                     <p>西藏应急分平台</p>
-                                    <p><i>36</i>次</p>
+                                    <p><i>{{lrSaveDrilling[2].xizangPlatform}}</i>次</p>
                                 </div>
                             </div>
                         </div>
@@ -176,22 +176,22 @@
                 </div>
             </div>
             <div class="right">
-                <div class="rightTop">
+                <div class="rightTop" v-show="EmergencyStatisticsData">
                     <div class="rightTopLeft">
                         <h4>主平台应急事件统计</h4>
                         <div class="rightTopLeftFrame">
                             <div class="rightTopLeftFrameLeft">
                                 <div>
                                     <P>应急事件数</P>
-                                    <P><i>96</i>项</P>
+                                    <P><i>{{EmergencyStatisticsData[0].mainPlatform}}</i>项</P>
                                 </div>
                                 <div>
                                     <P>处理完结数</P>
-                                    <P><i>90</i>项</P>
+                                    <P><i>{{EmergencyStatisticsData[1].mainPlatform}}</i>项</P>
                                 </div>
                                 <div>
                                     <P>正在处理数</P>
-                                    <P><i class="redMark">6</i>项</P>
+                                    <P><i class="redMark">{{EmergencyStatisticsData[2].mainPlatform}}</i>项</P>
                                 </div>
                             </div>
                             <div class="rightTopLeftFrameRight">
@@ -209,9 +209,9 @@
                                         <p>在处理数</p>
                                     </div>
                                     <div>
-                                        <p><i>10</i>项</p>
-                                        <p><i>10</i>项</p>
-                                        <p><i class="redMark">0</i>项</p>
+                                        <p><i>{{EmergencyStatisticsData[0].sichuanPlatform}}</i>项</p>
+                                        <p><i>{{EmergencyStatisticsData[1].sichuanPlatform}}</i>项</p>
+                                        <p><i class="redMark">{{EmergencyStatisticsData[2].sichuanPlatform}}</i>项</p>
                                     </div>
                                 </div>
                                 <h5>四川分平台</h5>
@@ -224,9 +224,9 @@
                                         <p>在处理数</p>
                                     </div>
                                     <div>
-                                        <p><i>18</i>项</p>
-                                        <p><i>17</i>项</p>
-                                        <p><i class="redMark">1</i>项</p>
+                                        <p><i>{{EmergencyStatisticsData[0].yunnanPlatform}}</i>项</p>
+                                        <p><i>{{EmergencyStatisticsData[1].yunnanPlatform}}</i>项</p>
+                                        <p><i class="redMark">{{EmergencyStatisticsData[2].yunnanPlatform}}</i>项</p>
                                     </div>
                                 </div>
                                 <h5>云南分平台</h5>
@@ -241,9 +241,9 @@
                                         <p>在处理数</p>
                                     </div>
                                     <div>
-                                        <p><i>20</i>项</p>
-                                        <p><i>17</i>项</p>
-                                        <p><i class="redMark">3</i>项</p>
+                                        <p><i>{{EmergencyStatisticsData[0].guizhouPlatform}}</i>项</p>
+                                        <p><i>{{EmergencyStatisticsData[1].guizhouPlatform}}</i>项</p>
+                                        <p><i class="redMark">{{EmergencyStatisticsData[2].guizhouPlatform}}</i>项</p>
                                     </div>
                                 </div>
                                 <h5>贵州分平台</h5>
@@ -256,9 +256,9 @@
                                         <p>在处理数</p>
                                     </div>
                                     <div>
-                                        <p><i>0</i>项</p>
-                                        <p><i>0</i>项</p>
-                                        <p><i class="redMark">0</i>项</p>
+                                        <p><i>{{EmergencyStatisticsData[0].xizangPlatform}}</i>项</p>
+                                        <p><i>{{EmergencyStatisticsData[1].xizangPlatform}}</i>项</p>
+                                        <p><i class="redMark">{{EmergencyStatisticsData[2].xizangPlatform}}</i>项</p>
                                     </div>
                                 </div>
                                 <h5>西藏分平台</h5>
@@ -334,8 +334,7 @@
                 </div>
                 <div class="rightBottom">
                     <div class="rightBottomTop">
-                        <i>处理完结事件</i>
-                        <i>正在处理事件</i>
+                        <i v-for="(data,i) in DBPList" :key="i" @click="DBProject(i)" :class="{checkI:i === DBPIsShow}">{{data}}</i>
                     </div>
                     <div class="rightBottomBottom">
                         <div class="rightBottomBottomTableTitle">
@@ -354,29 +353,17 @@
                                 </thead>
                             </table>
                         </div>
-                        <table>
-                            <thead style="opacity: 0">
-                                <tr>
-                                    <th>序号</th>
-                                    <th>报送单位</th>
-                                    <th>发生时间</th>
-                                    <th>工程名称</th>
-                                    <th>时间部位</th>
-                                    <th>时间类别</th>
-                                    <th>快报时间</th>
-                                    <th>续报次数</th>
-                                </tr>
-                            </thead>
+                        <table :class="{'tableScrollAnimation': DetailsEmergencyQuickReportContinuationReportData.saveAccidentEndList.length>=15}">
                             <tbody>
-                                <tr v-for="(data,i) in tableData" :value="data.project" :key="i">
+                                <tr v-for="(data,i) in (DBPIsShow === 0?DetailsEmergencyQuickReportContinuationReportData.saveAccidentEndList:DetailsEmergencyQuickReportContinuationReportData.saveAccidentIngList)" :value="data.F_EnginerName" :key="i">
                                     <td>{{i++}}</td>
-                                    <td>{{data.project}}</td>
-                                    <td>{{data.name}}</td>
-                                    <td>{{data.post}}</td>
-                                    <td>{{data.certificate}}</td>
-                                    <td>{{data.time}}</td>
-                                    <td>{{data.date}}</td>
-                                    <td>{{data.date}}</td>
+                                    <td>{{data.F_CompanyName}}</td>
+                                    <td>{{data.F_HappenTime}}</td>
+                                    <td>{{data.F_EnginerName}}</td>
+                                    <td>{{data.F_HappenPlace}}</td>
+                                    <td>{{data.F_AccidentClass}}</td>
+                                    <td>{{data.F_ReportTime}}</td>
+                                    <td>{{data.reportNum}}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -396,6 +383,10 @@
         },
         data() {
             return {
+                DBPList: ['处理完结事件','正在处理事件'],
+                DBPIsShow: 0,
+                EmergencyStatisticsData: '',
+                DetailsEmergencyQuickReportContinuationReportData: '',
                 lrSaveDrilling: '',
                 mapData: {
                     valCompany: '',
@@ -463,8 +454,6 @@
                     {text: '十一月', value: '十一月'},
                     {text: '十二月', value: '十二月'},
                 ],
-                riskDangerData: '',
-                saveStorageData: '',
                 tableData:[
                     {project:'001',name:'001',post:'001',certificate:'001',time:'001',date:'001'},
                     {project:'002',name:'002',post:'002',certificate:'002',time:'002',date:'002'},
@@ -495,6 +484,8 @@
                 this.changeSeasonMonth(e);
                 this.$refs.map.getRouteData(this.mapData.valContract === '' ? this.mapData.valProject : this.mapData.valContract);
                 this.getAllData();
+                this.getDetailsEmergencyQuickReportContinuationReportData();
+                this.getEmergencyStatisticsData();
             },
             getProjectVal() {
                 const that = this;
@@ -567,26 +558,8 @@
             changeProject() {
                 this.$refs.map.mapProvinceShow(this.mapData.valProvince);
             },
-            getData() {
-                const that = this;
-                const parameter = {
-                    companyId: '',
-                    yearStr: '',
-                    monthStr: '',
-                    quarterStr: '',
-                };
-                // 发送 POST 请求
-                this.$getUrl('getMapMessage.do', parameter)
-                    .then(function (response) {
-                        that.riskDangerData = response.riskDangerData;
-                        that.saveStorageData = response.saveStorageData;
-                        // that.map();
-                    })
-                    .catch(function (error) {
-
-                    });
-            },
             creatLabel() {
+                const that = this;
                 const echarts = require('echarts');
                 // 基于准备好的dom，初始化echarts实例
                 const myChart = echarts.init(this.$refs.label);
@@ -600,7 +573,7 @@
                         orient: 'vertical',
                         x: 'right',
                         y: 'middle',
-                        data: ['应急事件数', '处理完结数', '正在处理数'],
+                        data: ['处理完结数', '正在处理数'],
                         textStyle: {
                             color: '#fff'
                         },
@@ -641,11 +614,10 @@
                                 }
                             },
                             data: [
-                                {value: 96, name: '应急事件数'},
-                                {value: 90, name: '处理完结数'},
-                                {value: 6, name: '正在处理数'},
+                                {value: that.EmergencyStatisticsData[1].mainPlatform, name: '处理完结数'},
+                                {value: that.EmergencyStatisticsData[2].mainPlatform, name: '正在处理数'},
                             ],
-                            color: ['#E3AB00','#F40000','#FFF']
+                            color: ['#00B050','#FFC000']
                         },
                     ]
                 };
@@ -662,22 +634,64 @@
                 };
                 // 发送 POST 请求
                 this.$getUrl('getLrSaveDrilling.do', parameter)
-                    .then(function (response) {
-                        // console.log(response);
-                        that.lrSaveDrilling = '';
-                        that.lrSaveDrilling = response.lrSaveDrilling[0];
+                    .then(function (data) {
+                        console.log(data.lrSaveDrilling);
+                        that.lrSaveDrilling = data.lrSaveDrilling;
                     })
                     .catch(function (error) {
-                        // console.log(error);
+
                     });
+            },
+            getEmergencyStatisticsData(){
+                const that = this;
+                const parameter = {
+                    companyId: this.mapData.valContract === '' ? this.mapData.valProject : this.mapData.valContract,
+                    yearStr: this.mapData.valYear,
+                    monthStr: this.mapData.valMonth,
+                    quarterStr: this.mapData.valSeason,
+                };
+                // 发送 POST 请求
+                this.$getUrlEP('getSaveAccident.do', parameter)
+                    .then(function (data) {
+                        console.log(data.saveAccident);
+                        that.EmergencyStatisticsData = data.saveAccident;
+                        that.creatLabel();
+                    })
+                    .catch(function (error) {
+
+                    });
+            },
+            getDetailsEmergencyQuickReportContinuationReportData(){
+                const that = this;
+                const parameter = {
+                    companyId: this.mapData.valContract === '' ? this.mapData.valProject : this.mapData.valContract,
+                    yearStr: this.mapData.valYear,
+                    monthStr: this.mapData.valMonth,
+                    quarterStr: this.mapData.valSeason,
+                };
+                // 发送 POST 请求
+                this.$getUrlEP('getSaveAccidentList.do', parameter)
+                    .then(function (data) {
+                        console.log(data);
+                        that.DetailsEmergencyQuickReportContinuationReportData = data;
+                    })
+                    .catch(function (error) {
+
+                    });
+            },
+            DBProject(e){
+                this.DBPIsShow = e;
             },
         },
         mounted() {
             this.getProjectVal();
             this.getContractVal();
-            this.getData();
-            this.creatLabel();
             this.getAllData();
+            this.getEmergencyStatisticsData();
+            this.getDetailsEmergencyQuickReportContinuationReportData();
+        },
+        created() {
+
         }
     }
 </script>
@@ -941,6 +955,8 @@
 
     .rightTopLeftFrameRight{
         flex: 1;
+        width: 100%;
+        height: 100%;
     }
 
     .label{
@@ -1024,7 +1040,7 @@
         margin: 0 15px;
     }
 
-    .rightBottomTop i:first-child{
+    .checkI{
         background-color: #164989;
     }
 
@@ -1033,7 +1049,7 @@
     }
 
     .rightBottomBottom{
-        height: 100%;
+        height: 94%;
         overflow: hidden;
     }
 
@@ -1052,13 +1068,35 @@
         color: #02E3FA;
         border-collapse: collapse;
         position: relative;
+        table-layout: fixed;
+    }
+
+    .tableScrollAnimation{
+        position: relative;
         top: 0;
         -webkit-animation: scrollToUp 10s linear infinite; /* 引入 scrollToUp动画 */
         animation: scrollToUp 10s linear infinite;
     }
 
+    .rightBottomBottom table th:first-child{
+        width: 60px;
+    }
+
+    .rightBottomBottom table th:last-child{
+        width: 60px;
+    }
+
+    .rightBottomBottom table td:first-child{
+        width: 60px;
+    }
+
+    .rightBottomBottom table td:last-child{
+        width: 60px;
+    }
+
     .rightBottomBottom table td {
         border-bottom: 1px dashed #7F9EBA;
+        padding: 0 2px;
     }
 
     @-webkit-keyframes scrollToUp {

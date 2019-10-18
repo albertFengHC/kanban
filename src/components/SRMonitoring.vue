@@ -234,7 +234,7 @@
                                     <table  :class="{'tableScrollAnimation': SafetyEarlyWarningMonitoringDangerousProjectsTableLength>=3}" ref="tableFrameTable">
                                         <tbody>
                                             <tr v-for="(data,i) in (DBPIsShow===0?safetyRiskList.deepFP:DBPIsShow===1?safetyRiskList.highM:safetyRiskList.highS)" :value="data.F_ProjectName" :key="i">
-                                                <td>{{i++}}</td>
+                                                <td>{{++i}}</td>
                                                 <td>{{data.F_ProjectName}}</td>
                                                 <td>{{data.F_BidSection}}</td>
                                                 <td>{{data.F_TestAddress}}</td>
@@ -308,7 +308,7 @@
                             <table ref="rightMRTable"  :class="{'tableScrollAnimation': SafetyEarlyWarningMonitoringSpecialEquipmentTableLength>=3}">
                                 <tbody>
                                     <tr v-for="(data,i) in (SEIsShow===0?specialEquipmentList.towerC:SEIsShow===1?specialEquipmentList.gantryC:(SEIsShow===2?specialEquipmentList.constructionE:specialEquipmentList.bridgeEM))" :value="data.F_ProjectName" :key="i">
-                                        <td>{{i++}}</td>
+                                        <td>{{++i}}</td>
                                         <td>{{data.F_ProjectName}}</td>
                                         <td>{{data.F_BidSection}}</td>
                                         <td>{{data.F_TestAddress}}</td>

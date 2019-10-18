@@ -187,7 +187,7 @@
                                 <table :class="{'tableScrollAnimation': HDSGCUSNData.length>=15}">
                                     <tbody>
                                         <tr v-for="(data,i) in HDSGCUSNData" :value="data.F_Id" :key="i" @click="getDIHDUSNData(data.F_Id)">
-                                            <td>{{i++}}</td>
+                                            <td>{{++i}}</td>
                                             <td>{{data.F_CompanyName}}</td>
                                             <td>{{data.F_CheckDate}}</td>
                                             <td>{{data.F_PassiveName}}</td>
