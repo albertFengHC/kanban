@@ -89,9 +89,8 @@
                 </div>
                 <div class="leftMid">
                     <myMap :msg='mapData' ref="map" class="myMap"/>
-<!--                    <div ref="mapFrame" class="mapFrame"></div>-->
                 </div>
-                <div class="leftBottom" v-show="lrSaveDrilling">
+                <div class="leftBottom" v-if="lrSaveDrilling != ''">
                     <div class="leftBottomLeft">
                         <h4>应急机构信息统计</h4>
                         <div class="leftBottomLeftFrame">
@@ -176,11 +175,12 @@
                 </div>
             </div>
             <div class="right">
-                <div class="rightTop" v-show="EmergencyStatisticsData">
+                <div class="rightTop" v-if="EmergencyStatisticsData != ''">
                     <div class="rightTopLeft">
                         <h4>主平台应急事件统计</h4>
                         <div class="rightTopLeftFrame">
                             <div class="rightTopLeftFrameLeft">
+<!--                                <div></div>-->
                                 <div>
                                     <P>应急事件数</P>
                                     <P><i>{{EmergencyStatisticsData[0].mainPlatform}}</i>项</P>
@@ -194,8 +194,8 @@
                                     <P><i class="redMark">{{EmergencyStatisticsData[2].mainPlatform}}</i>项</P>
                                 </div>
                             </div>
-                            <div class="rightTopLeftFrameRight">
-                                <div ref="labelPie" class="labelPie"></div>
+                            <div class="rightTopLeftFrameRight" id="rightTopLeftFrameRight">
+                                <div ref="labelPie" class="labelPie" id="labelPie"></div>
                             </div>
                         </div>
                     </div>
@@ -378,7 +378,6 @@
 
 <script>
     import myMap from '../components/indexPage/myMap.vue';
-    // import * as echarts from 'echarts';
     export default {
         name: "ERMonitoring",
         components: {
@@ -457,27 +456,6 @@
                     {text: '十一月', value: '十一月'},
                     {text: '十二月', value: '十二月'},
                 ],
-                tableData:[
-                    {project:'001',name:'001',post:'001',certificate:'001',time:'001',date:'001'},
-                    {project:'002',name:'002',post:'002',certificate:'002',time:'002',date:'002'},
-                    {project:'003',name:'003',post:'003',certificate:'003',time:'003',date:'003'},
-                    {project:'001',name:'001',post:'001',certificate:'001',time:'001',date:'001'},
-                    {project:'001',name:'001',post:'001',certificate:'001',time:'001',date:'001'},
-                    {project:'001',name:'001',post:'001',certificate:'001',time:'001',date:'001'},
-                    {project:'001',name:'001',post:'001',certificate:'001',time:'001',date:'001'},
-                    {project:'001',name:'001',post:'001',certificate:'001',time:'001',date:'001'},
-                    {project:'001',name:'001',post:'001',certificate:'001',time:'001',date:'001'},
-                    {project:'001',name:'001',post:'001',certificate:'001',time:'001',date:'001'},
-                    {project:'001',name:'001',post:'001',certificate:'001',time:'001',date:'001'},
-                    {project:'001',name:'001',post:'001',certificate:'001',time:'001',date:'001'},
-                    {project:'001',name:'001',post:'001',certificate:'001',time:'001',date:'001'},
-                    {project:'001',name:'001',post:'001',certificate:'001',time:'001',date:'001'},
-                    {project:'001',name:'001',post:'001',certificate:'001',time:'001',date:'001'},
-                    {project:'001',name:'001',post:'001',certificate:'001',time:'001',date:'001'},
-                    {project:'001',name:'001',post:'001',certificate:'001',time:'001',date:'001'},
-                    {project:'001',name:'001',post:'001',certificate:'001',time:'001',date:'001'},
-                    {project:'001',name:'001',post:'001',certificate:'001',time:'001',date:'001'},
-                ]
             }
         },
         methods:{
@@ -565,117 +543,119 @@
                 const that = this;
                 const echarts = require('echarts');
                 console.log(echarts);
-                // 基于准备好的dom，初始化echarts实例
-                const myChart = echarts.init(this.$refs.labelPie);
-                console.log(myChart);
+                that.$nextTick(() => {
+                    console.log(that.$refs.labelPie);
+                    // 基于准备好的dom，初始化echarts实例
+                    let myChart = echarts.init(that.$refs.labelPie);
 
-                // let option = {
-                //     tooltip: {
-                //         trigger: 'item',
-                //         formatter: "{b}: {c}项"
-                //     },
-                //     legend: {
-                //         orient: 'vertical',
-                //         x: 'right',
-                //         y: 'middle',
-                //         data: ['处理完结数', '正在处理数'],
-                //         textStyle: {
-                //             color: '#fff'
-                //         },
-                //         show:false
-                //     },
-                //     series: [
-                //         {
-                //             // name: '访问来源',
-                //             type: 'pie',
-                //             radius: ['60%', '90%'],
-                //             center: ["50%", "50%"],
-                //             avoidLabelOverlap: false,
-                //             label: {
-                //                 normal: {
-                //                     show: true,
-                //                     position: 'center',
-                //                     formatter:function (argument) {
-                //                         let html='主平台应急'+"\n"+'事件统计';
-                //                         return html;
-                //                     },
-                //                     textStyle:{
-                //                         // fontSize: 15,
-                //                         color:'#fff'
-                //                     }
-                //                 },
-                //                 emphasis: {
-                //                     show: false,
-                //                     textStyle: {
-                //                         fontSize: '20',
-                //                         fontWeight: 'bold',
-                //                         color: '#fff',
-                //                     },
-                //                 }
-                //             },
-                //             labelLine: {
-                //                 normal: {
-                //                     show: false
-                //                 }
-                //             },
-                //             data: [
-                //                 {value: 30, name: '处理完结数'},
-                //                 {value: 50, name: '正在处理数'},
-                //                 // {value: that.EmergencyStatisticsData[1].mainPlatform, name: '处理完结数'},
-                //                 // {value: that.EmergencyStatisticsData[2].mainPlatform, name: '正在处理数'},
-                //             ],
-                //             color: ['#00B050','#FFC000']
-                //         },
-                //     ]
-                // };
+                    // let option = {
+                    //     tooltip: {
+                    //         trigger: 'item',
+                    //         formatter: "{b}: {c}项"
+                    //     },
+                    //     legend: {
+                    //         orient: 'vertical',
+                    //         x: 'right',
+                    //         y: 'middle',
+                    //         data: ['处理完结数', '正在处理数'],
+                    //         textStyle: {
+                    //             color: '#fff'
+                    //         },
+                    //         show:false
+                    //     },
+                    //     series: [
+                    //         {
+                    //             // name: '访问来源',
+                    //             type: 'pie',
+                    //             radius: ['60%', '90%'],
+                    //             center: ["50%", "50%"],
+                    //             avoidLabelOverlap: false,
+                    //             label: {
+                    //                 normal: {
+                    //                     show: true,
+                    //                     position: 'center',
+                    //                     formatter:function (argument) {
+                    //                         let html='主平台应急'+"\n"+'事件统计';
+                    //                         return html;
+                    //                     },
+                    //                     textStyle:{
+                    //                         // fontSize: 15,
+                    //                         color:'#fff'
+                    //                     }
+                    //                 },
+                    //                 emphasis: {
+                    //                     show: false,
+                    //                     textStyle: {
+                    //                         fontSize: '20',
+                    //                         fontWeight: 'bold',
+                    //                         color: '#fff',
+                    //                     },
+                    //                 }
+                    //             },
+                    //             labelLine: {
+                    //                 normal: {
+                    //                     show: false
+                    //                 }
+                    //             },
+                    //             data: [
+                    //                 {value: 30, name: '处理完结数'},
+                    //                 {value: 50, name: '正在处理数'},
+                    //                 // {value: that.EmergencyStatisticsData[1].mainPlatform, name: '处理完结数'},
+                    //                 // {value: that.EmergencyStatisticsData[2].mainPlatform, name: '正在处理数'},
+                    //             ],
+                    //             color: ['#00B050','#FFC000']
+                    //         },
+                    //     ]
+                    // };
 
-                let option = {
-                    tooltip: {
-                        trigger: 'item',
-                        formatter: "{a} <br/>{b}: {c} ({d}%)"
-                    },
-                    legend: {
-                        orient: 'vertical',
-                        x: 'left',
-                        data:['直接访问','邮件营销','联盟广告','视频广告','搜索引擎'],
-                        show: false
-                    },
-                    series: [
-                        {
-                            name:'访问来源',
-                            type:'pie',
-                            radius: ['50%', '70%'],
-                            avoidLabelOverlap: false,
-                            label: {
-                                normal: {
-                                    show: false,
-                                    position: 'center'
-                                },
-                                emphasis: {
-                                    show: true,
-                                    textStyle: {
-                                        fontSize: '30',
-                                        fontWeight: 'bold'
+                    let option = {
+                        tooltip: {
+                            trigger: 'item',
+                            formatter: "{a} <br/>{b}: {c} ({d}%)"
+                        },
+                        legend: {
+                            orient: 'vertical',
+                            x: 'left',
+                            data:['直接访问','邮件营销','联盟广告','视频广告','搜索引擎'],
+                            show: false
+                        },
+                        series: [
+                            {
+                                name:'访问来源',
+                                type:'pie',
+                                radius: ['50%', '70%'],
+                                avoidLabelOverlap: false,
+                                label: {
+                                    normal: {
+                                        show: false,
+                                        position: 'center'
+                                    },
+                                    emphasis: {
+                                        show: true,
+                                        textStyle: {
+                                            fontSize: '30',
+                                            fontWeight: 'bold'
+                                        }
                                     }
-                                }
-                            },
-                            labelLine: {
-                                normal: {
-                                    show: false
-                                }
-                            },
-                            data:[
-                                {value:335, name:'直接访问'},
-                                {value:310, name:'邮件营销'},
-                                {value:234, name:'联盟广告'},
-                                {value:135, name:'视频广告'},
-                                {value:1548, name:'搜索引擎'}
-                            ]
-                        }
-                    ]
-                };
-                // 绘制图表
-                myChart.setOption(option);
+                                },
+                                labelLine: {
+                                    normal: {
+                                        show: false
+                                    }
+                                },
+                                data:[
+                                    {value:335, name:'直接访问'},
+                                    {value:310, name:'邮件营销'},
+                                    {value:234, name:'联盟广告'},
+                                    {value:135, name:'视频广告'},
+                                    {value:1548, name:'搜索引擎'}
+                                ]
+                            }
+                        ]
+                    };
+                    // 绘制图表
+                    myChart.setOption(option);
+                });
             },
             getAllData(){
                 const that = this;
@@ -705,7 +685,9 @@
                 // 发送 POST 请求
                 this.$getUrlEP('getSaveAccident.do', parameter)
                     .then(function (data) {
+                        console.log(data);
                         that.EmergencyStatisticsData = data.saveAccident;
+
                     })
                     .catch(function (error) {
 
@@ -734,13 +716,14 @@
         },
         mounted() {
             this.creatLabel();
-        },
-        created() {
             this.getProjectVal();
             this.getContractVal();
             this.getAllData();
             this.getEmergencyStatisticsData();
             this.getDetailsEmergencyQuickReportContinuationReportData();
+        },
+        created() {
+
         }
     }
 </script>
@@ -885,12 +868,6 @@
         flex: 5;
     }
 
-    .mapFrame {
-        width: 100%;
-        height: 100%;
-        color: #02010f;
-    }
-
     .leftBottom{
         display: flex;
         justify-content: space-between;
@@ -1014,7 +991,7 @@
         flex: 3;
     }
 
-    .labelPie{
+    #labelPie{
         width: 100%;
         height: 100%;
     }
