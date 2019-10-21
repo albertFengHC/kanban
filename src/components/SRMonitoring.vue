@@ -1037,7 +1037,7 @@
                         {
                             name: '项',
                             type: 'bar',
-                            data: [that.RiskHandlingInformationStatisticsData.riskDangerLevel.oneType,that.RiskHandlingInformationStatisticsData.riskDangerLevel.twoType,that.RiskHandlingInformationStatisticsData.riskDangerLevel.threeType,that.RiskHandlingInformationStatisticsData.riskDangerLevel.fourType],
+                            data: [that.safetyRisk.oneType,that.safetyRisk.twoType,that.safetyRisk.threeType,that.safetyRisk.fourType],
                             itemStyle: {
                                 normal: {
                                     color: function(params) {
@@ -1146,7 +1146,6 @@
                     .then(function (data) {
                         console.log(data);
                         that.RiskHandlingInformationStatisticsData.riskDanger = data.riskDanger[0];
-                        that.RiskHandlingInformationStatisticsData.riskDangerLevel = data.riskDangerLevel[0];
 
                         that.creatLabelMid();
                         that.creatLabelRight();
