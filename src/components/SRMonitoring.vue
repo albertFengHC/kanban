@@ -248,6 +248,257 @@
                             </div>
                         </div>
                     </div>
+                    <div class="TunnelMonitoring" v-show="CheckTunnelMonitoringDetailShow">
+                        <h3>隧道监控</h3>
+                        <p @click="CheckTunnelMonitoringHide">X</p>
+                        <div>
+                            <i v-for="(data,i) in TunnelMonitoringList" :key="i" @click="TunnelMonitoringProject(i)" :class="{checkI:i === TunnelMonitoringShow}">{{data}}</i>
+                        </div>
+                        <div class="tableFrame PersonnelPositioningTable" v-show="TunnelMonitoringShow === 0">
+                            <div class="tableFrameTableTitle">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>序号</th>
+                                            <th>项目名称</th>
+                                            <th>标段</th>
+                                            <th>隧道名称</th>
+                                            <th>洞幅</th>
+                                            <th>姓名</th>
+                                            <th>职务</th>
+                                            <th>入洞时间</th>
+                                            <th>到达部位</th>
+                                            <th>达到时间</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                            <div>
+                                <table  :class="{'tableScrollAnimation': TunnelMonitoringData.personLocationList>=10}" ref="tableFrameTable">
+                                    <tbody>
+                                        <tr v-for="(data,i) in TunnelMonitoringData.personLocationList" :value="data.F_ProjectName" :key="i">
+                                            <td>{{++i}}</td>
+                                            <td>{{data.F_ProjectName}}</td>
+                                            <td>{{data.F_BidSection}}</td>
+                                            <td>{{data.F_TunnelName}}</td>
+                                            <td>{{data.F_TunnelDirection}}</td>
+                                            <td>{{data.F_UserName}}</td>
+                                            <td>{{data.F_Job}}</td>
+                                            <td>{{data.F_InDate}}</td>
+                                            <td>{{data.F_ArriveAddress}}</td>
+                                            <td>{{data.F_ArriveDate}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="tableFrame StaffAttendanceTable" v-show="TunnelMonitoringShow === 1">
+                            <div class="tableFrameTableTitle">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>序号</th>
+                                            <th>项目名称</th>
+                                            <th>标段</th>
+                                            <th>隧道名称</th>
+                                            <th>洞幅</th>
+                                            <th>姓名</th>
+                                            <th>职务</th>
+                                            <th>入洞时间</th>
+                                            <th>出洞时间</th>
+                                            <th>时长(h)</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                            <div>
+                                <table  :class="{'tableScrollAnimation': TunnelMonitoringData.personCheckList>=10}" ref="tableFrameTable">
+                                    <tbody>
+                                    <tr v-for="(data,i) in TunnelMonitoringData.personCheckList" :value="data.F_ProjectName" :key="i">
+                                        <td>{{++i}}</td>
+                                        <td>{{data.F_ProjectName}}</td>
+                                        <td>{{data.F_BidSection}}</td>
+                                        <td>{{data.F_TunnelName}}</td>
+                                        <td>{{data.F_TunnelDirection}}</td>
+                                        <td>{{data.F_UserName}}</td>
+                                        <td>{{data.F_Job}}</td>
+                                        <td>{{data.F_InDate}}</td>
+                                        <td>{{data.F_OutDate}}</td>
+                                        <td>{{data.F_DateValue}}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="tableFrame EnvironmentalMonitoringTable" v-show="TunnelMonitoringShow === 2">
+                            <div class="tableFrameTableTitle">
+                                <table>
+                                    <thead>
+                                    <tr>
+                                        <th>序号</th>
+                                        <th>项目名称</th>
+                                        <th>标段</th>
+                                        <th>隧道名称</th>
+                                        <th>洞幅</th>
+                                        <th>预警参数</th>
+                                        <th>传感器编号</th>
+                                        <th>传感器名称</th>
+                                        <th>实测值</th>
+                                        <th>单位</th>
+                                        <th>采集时间</th>
+                                        <th>预警级别</th>
+                                    </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                            <div>
+                                <table  :class="{'tableScrollAnimation': TunnelMonitoringData.environmentalList>=10}" ref="tableFrameTable">
+                                    <tbody>
+                                    <tr v-for="(data,i) in TunnelMonitoringData.environmentalList" :value="data.F_ProjectName" :key="i">
+                                        <td>{{++i}}</td>
+                                        <td>{{data.F_ProjectName}}</td>
+                                        <td>{{data.F_BidSection}}</td>
+                                        <td>{{data.F_TunnelName}}</td>
+                                        <td>{{data.F_TunnelDirection}}</td>
+                                        <td>{{data.F_WarnParameter}}</td>
+                                        <td>{{data.F_SensorNum}}</td>
+                                        <td>{{data.F_SensorName}}</td>
+                                        <td>{{data.F_TestValue}}</td>
+                                        <td>{{data.F_Unit}}</td>
+                                        <td>{{data.F_CollectionDate}}</td>
+                                        <td>{{data.F_WarnType}}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="tableFrame SafeStepDistanceTable" v-show="TunnelMonitoringShow === 3">
+                            <div class="tableFrameTableTitle">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>序号</th>
+                                            <th>项目名称</th>
+                                            <th>标段</th>
+                                            <th>隧道名称</th>
+                                            <th>洞幅</th>
+                                            <th>围岩等级</th>
+                                            <th>检测类型</th>
+                                            <th>标准步距(m)</th>
+                                            <th>实际步距(m)</th>
+                                            <th>差值(m)</th>
+                                            <th>采集时间</th>
+                                            <th>预警级别</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                            <div>
+                                <table  :class="{'tableScrollAnimation': TunnelMonitoringData.safetyStepList>=10}" ref="tableFrameTable">
+                                    <tbody>
+                                    <tr v-for="(data,i) in TunnelMonitoringData.safetyStepList" :value="data.F_ProjectName" :key="i">
+                                        <td>{{++i}}</td>
+                                        <td>{{data.F_ProjectName}}</td>
+                                        <td>{{data.F_BidSection}}</td>
+                                        <td>{{data.F_TunnelName}}</td>
+                                        <td>{{data.F_TunnelDirection}}</td>
+                                        <td>{{data.F_RockLevel}}</td>
+                                        <td>{{data.F_WarnType}}</td>
+                                        <td>{{data.F_StandardStep}}</td>
+                                        <td>{{data.F_ActualStep}}</td>
+                                        <td>{{data.F_Step}}</td>
+                                        <td>{{data.F_CollectionDate}}</td>
+                                        <td>{{data.F_TestType}}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="tableFrame AdvanceGeologicalPredictionTable" v-show="TunnelMonitoringShow === 4">
+                            <div class="tableFrameTableTitle">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>序号</th>
+                                            <th>项目名称</th>
+                                            <th>标段</th>
+                                            <th>隧道名称</th>
+                                            <th>洞幅</th>
+                                            <th>方向</th>
+                                            <th>预警开始里程</th>
+                                            <th>预警结束里程</th>
+                                            <th>风险类型</th>
+                                            <th>探测类型</th>
+                                            <th>采集时间</th>
+                                            <th>预警级别</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                            <div>
+                                <table  :class="{'tableScrollAnimation': TunnelMonitoringData.geologicalList>=10}" ref="tableFrameTable">
+                                    <tbody>
+                                    <tr v-for="(data,i) in TunnelMonitoringData.geologicalList" :value="data.F_ProjectName" :key="i">
+                                        <td>{{++i}}</td>
+                                        <td>{{data.F_ProjectName}}</td>
+                                        <td>{{data.F_BidSection}}</td>
+                                        <td>{{data.F_TunnelName}}</td>
+                                        <td>{{data.F_TunnelDirection}}</td>
+                                        <td>{{data.F_Direction}}</td>
+                                        <td>{{data.F_StartMileage}}</td>
+                                        <td>{{data.F_EndMileage}}</td>
+                                        <td>{{data.F_RiskType}}</td>
+                                        <td>{{data.F_ProbeType}}</td>
+                                        <td>{{data.F_CollectionDate}}</td>
+                                        <td>{{data.F_WarnType}}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="tableFrame MonitoringMeasurementSurroundingRockTable" v-show="TunnelMonitoringShow === 5">
+                            <div class="tableFrameTableTitle">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>序号</th>
+                                            <th>项目名称</th>
+                                            <th>标段</th>
+                                            <th>隧道名称</th>
+                                            <th>洞幅</th>
+                                            <th>预警参数</th>
+                                            <th>传感器编号</th>
+                                            <th>传感器名称</th>
+                                            <th>实测值</th>
+                                            <th>单位</th>
+                                            <th>采集时间</th>
+                                            <th>预警级别</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                            <div>
+                                <table  :class="{'tableScrollAnimation': TunnelMonitoringData.rockList>=10}" ref="tableFrameTable">
+                                    <tbody>
+                                    <tr v-for="(data,i) in TunnelMonitoringData.rockList" :value="data.F_ProjectName" :key="i">
+                                        <td>{{++i}}</td>
+                                        <td>{{data.F_ProjectName}}</td>
+                                        <td>{{data.F_BidSection}}</td>
+                                        <td>{{data.F_TunnelName}}</td>
+                                        <td>{{data.F_TunnelDirection}}</td>
+                                        <td>{{data.F_WarnParameter}}</td>
+                                        <td>{{data.F_SensorNum}}</td>
+                                        <td>{{data.F_SensorName}}</td>
+                                        <td>{{data.F_TestValue}}</td>
+                                        <td>{{data.F_Unit}}</td>
+                                        <td>{{data.F_CollectionDate}}</td>
+                                        <td>{{data.F_WarnType}}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="rightMid">
                     <h3>特种设备安全预警监控</h3>
@@ -365,6 +616,17 @@
         },
         data() {
             return {
+                CheckTunnelMonitoringDetailShow: false,
+                TunnelMonitoringList: ['人员定位','人员考勤','环境监测','安全步距','超前地质预报','围岩监控量测'],
+                TunnelMonitoringShow: 0,
+                TunnelMonitoringData:{
+                    personLocationList:'',
+                    personCheckList:'',
+                    environmentalList:'',
+                    safetyStepList:'',
+                    geologicalList:'',
+                    rockList:''
+                },
                 SafetyEarlyWarningMonitoringDangerousProjectsTableLength: '',
                 SafetyEarlyWarningMonitoringSpecialEquipmentTableLength: '',
                 RiskHandlingInformationStatisticsData:{
@@ -895,10 +1157,42 @@
             },
             DBProject(e){
                 this.DBPIsShow = e;
+                if(e === 3){
+                    this.CheckTunnelMonitoringDetailShow = true;
+                }
             },
             SEquipment(e){
                 this.SEIsShow = e;
             },
+            TunnelMonitoringProject(e){
+                this.TunnelMonitoringShow = e;
+            },
+            getTunnelMonitoringData(){
+                const that = this;
+                const parameter = {
+                    companyId: this.mapData.valContract === '' ? this.mapData.valProject : this.mapData.valContract,
+                    yearStr: this.mapData.valYear,
+                    monthStr: this.mapData.valMonth,
+                    quarterStr: this.mapData.valSeason,
+                };
+                // 发送 POST 请求
+                this.$getUrlEP('getTunnelDanger.do', parameter)
+                    .then(function (data) {
+                        console.log(data);
+                        that.TunnelMonitoringData.personLocationList = data.personLocationList;
+                        that.TunnelMonitoringData.personCheckList = data.personCheckList;
+                        that.TunnelMonitoringData.environmentalList = data.environmentalList;
+                        that.TunnelMonitoringData.safetyStepList = data.safetyStepList;
+                        that.TunnelMonitoringData.geologicalList = data.geologicalList;
+                        that.TunnelMonitoringData.rockList = data.rockList;
+                    })
+                    .catch(function (error) {
+                        // console.log(error);
+                    });
+            },
+            CheckTunnelMonitoringHide(){
+                this.CheckTunnelMonitoringDetailShow = false;
+            }
         },
         mounted() {
             this.SafetyEarlyWarningMonitoringDangerousProjectsTableLength = this.$refs.tableFrameTable.rows.length;
@@ -911,6 +1205,7 @@
             this.getStatisticsStartInformationRiskSourcesData();
             this.getSRData();
             this.getRiskHandlingInformationStatisticsData();
+            this.getTunnelMonitoringData();
         }
     }
 </script>
@@ -1241,7 +1536,8 @@
 
     .rightTopRight .tableFrame{
         height: 100%;
-        overflow: hidden;
+        overflow-y: hidden;
+        overflow-x: auto;
     }
 
     .tableFrameTableTitle{
@@ -1481,5 +1777,61 @@
 
     .myMap{
         padding: 0;
+    }
+
+    /*隧道监控*/
+    .TunnelMonitoring{
+        position: absolute;
+        top: 15%;
+        left: 0;
+        z-index: 10000;
+        background-color: #fff;
+        padding: 15px;
+        overflow-y: auto;
+        border: 1px dashed #2E75B6;
+        border-radius: 5px;
+        color: #4b4b4b;
+        margin: 0 auto;
+    }
+
+    .TunnelMonitoring>div{
+        padding-bottom: 10px;
+    }
+
+    .TunnelMonitoring i{
+        display: inline-block;
+        padding: 5px 10px;
+        border: 1px dashed #2E75B6;
+        border-radius: 5px;
+
+    }
+
+    .TunnelMonitoring table{
+        width: 100%;
+        text-align: center;
+        table-layout: fixed;
+        overflow-x: auto;
+    }
+
+    .TunnelMonitoring .tableFrameTableTitle{
+        background-color: #fff;
+        z-index: 1000;
+        padding: 10px 0;
+        position: relative;
+        top: -5px;
+        text-align: center;
+    }
+
+    .TunnelMonitoring>p{
+        text-align: right;
+        font-weight: bold;
+        font-size: 20px;
+        /*color: #fff;*/
+        cursor: pointer;
+        padding-right: 15px;
+        padding-top: 10px;
+        position: absolute;
+        right: 0;
+        top: 0;
     }
 </style>
