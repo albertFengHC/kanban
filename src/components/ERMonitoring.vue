@@ -542,10 +542,9 @@
             creatLabel() {
                 const that = this;
                 const echarts = require('echarts');
-                console.log(echarts);
                 console.log(that.$refs.labelPie);
                 // 基于准备好的dom，初始化echarts实例
-                let myChart = echarts.init(that.$refs.labelPie);
+                const myChart = echarts.init(that.$refs.labelPie);
 
                 let option = {
                     tooltip: {

@@ -571,7 +571,7 @@
                         {
                             // name: '访问来源',
                             type: 'pie',
-                            radius: ['60%', '90%'],
+                            radius: ['70%', '100%'],
                             center: ["50%", "50%"],
                             avoidLabelOverlap: false,
                             label: {
@@ -758,6 +758,9 @@
                 this.CheckIssueProblemsDetailShow = false;
             }
         },
+        updated(){
+            // this.creatLabelLeft();
+        },
         mounted() {
 
         },
@@ -933,6 +936,9 @@
     .leftBottomLeft{
         margin-right: 15px;
         flex: 2;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
     }
 
     .leftBottomRight{
@@ -941,15 +947,17 @@
 
     .leftBottomLeft h4{
         padding-bottom: 10px;
+        flex: 1;
     }
 
     .leftBottomLeftFrame{
         display: flex;
         justify-content: space-between;
+        flex: 4;
     }
 
     .leftBottomLeftFrameLeft{
-        flex: 3;
+        flex: 2;
         display: flex;
         justify-content: space-between;
         font-size: 12px;
