@@ -1,7 +1,7 @@
 <template>
     <div class="DMSProduction">
         <h3 @click="showPopup">主平台信息统计</h3>
-        <div class="TContent">
+        <div class="TContent" v-if="lrSaveDrilling != ''">
             <div>
                 <p>应急机构总数</p>
                 <p>{{lrSaveDrilling[0].mainPlatform}}</p>
@@ -75,7 +75,6 @@
                 this.$getUrl('getLrSaveDrilling.do', parameter)
                     .then(function (data) {
                         console.log(data);
-                        that.lrSaveDrilling = '';
                         that.lrSaveDrilling = data.lrSaveDrilling;
                     })
                     .catch(function (error) {

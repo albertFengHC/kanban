@@ -337,7 +337,7 @@
                         <div class="rightBottomTop">
                             <i v-for="(data,i) in DBPList" :key="i" @click="DBProject(i)" :class="{checkI:i === DBPIsShow}">{{data}}</i>
                         </div>
-                        <div class="rightBottomBottom">
+                        <div class="rightBottomBottom" v-if="DetailsEmergencyQuickReportContinuationReportData.saveAccidentEndList">
                             <div class="rightBottomBottomTableTitle">
                                 <table>
                                     <thead>
@@ -543,119 +543,70 @@
                 const that = this;
                 const echarts = require('echarts');
                 console.log(echarts);
-                that.$nextTick(() => {
-                    console.log(that.$refs.labelPie);
-                    // 基于准备好的dom，初始化echarts实例
-                    let myChart = echarts.init(that.$refs.labelPie);
+                console.log(that.$refs.labelPie);
+                // 基于准备好的dom，初始化echarts实例
+                let myChart = echarts.init(that.$refs.labelPie);
 
-                    // let option = {
-                    //     tooltip: {
-                    //         trigger: 'item',
-                    //         formatter: "{b}: {c}项"
-                    //     },
-                    //     legend: {
-                    //         orient: 'vertical',
-                    //         x: 'right',
-                    //         y: 'middle',
-                    //         data: ['处理完结数', '正在处理数'],
-                    //         textStyle: {
-                    //             color: '#fff'
-                    //         },
-                    //         show:false
-                    //     },
-                    //     series: [
-                    //         {
-                    //             // name: '访问来源',
-                    //             type: 'pie',
-                    //             radius: ['60%', '90%'],
-                    //             center: ["50%", "50%"],
-                    //             avoidLabelOverlap: false,
-                    //             label: {
-                    //                 normal: {
-                    //                     show: true,
-                    //                     position: 'center',
-                    //                     formatter:function (argument) {
-                    //                         let html='主平台应急'+"\n"+'事件统计';
-                    //                         return html;
-                    //                     },
-                    //                     textStyle:{
-                    //                         // fontSize: 15,
-                    //                         color:'#fff'
-                    //                     }
-                    //                 },
-                    //                 emphasis: {
-                    //                     show: false,
-                    //                     textStyle: {
-                    //                         fontSize: '20',
-                    //                         fontWeight: 'bold',
-                    //                         color: '#fff',
-                    //                     },
-                    //                 }
-                    //             },
-                    //             labelLine: {
-                    //                 normal: {
-                    //                     show: false
-                    //                 }
-                    //             },
-                    //             data: [
-                    //                 {value: 30, name: '处理完结数'},
-                    //                 {value: 50, name: '正在处理数'},
-                    //                 // {value: that.EmergencyStatisticsData[1].mainPlatform, name: '处理完结数'},
-                    //                 // {value: that.EmergencyStatisticsData[2].mainPlatform, name: '正在处理数'},
-                    //             ],
-                    //             color: ['#00B050','#FFC000']
-                    //         },
-                    //     ]
-                    // };
-
-                    let option = {
-                        tooltip: {
-                            trigger: 'item',
-                            formatter: "{a} <br/>{b}: {c} ({d}%)"
+                let option = {
+                    tooltip: {
+                        trigger: 'item',
+                        formatter: "{b}: {c}项"
+                    },
+                    legend: {
+                        orient: 'vertical',
+                        x: 'right',
+                        y: 'middle',
+                        data: ['处理完结数', '正在处理数'],
+                        textStyle: {
+                            color: '#fff'
                         },
-                        legend: {
-                            orient: 'vertical',
-                            x: 'left',
-                            data:['直接访问','邮件营销','联盟广告','视频广告','搜索引擎'],
-                            show: false
-                        },
-                        series: [
-                            {
-                                name:'访问来源',
-                                type:'pie',
-                                radius: ['50%', '70%'],
-                                avoidLabelOverlap: false,
-                                label: {
-                                    normal: {
-                                        show: false,
-                                        position: 'center'
+                        show:false
+                    },
+                    series: [
+                        {
+                            // name: '访问来源',
+                            type: 'pie',
+                            radius: ['60%', '90%'],
+                            center: ["50%", "50%"],
+                            avoidLabelOverlap: false,
+                            label: {
+                                normal: {
+                                    show: true,
+                                    position: 'center',
+                                    formatter:function (argument) {
+                                        let html='主平台应急'+"\n"+'事件统计';
+                                        return html;
                                     },
-                                    emphasis: {
-                                        show: true,
-                                        textStyle: {
-                                            fontSize: '30',
-                                            fontWeight: 'bold'
-                                        }
+                                    textStyle:{
+                                        // fontSize: 15,
+                                        color:'#fff'
                                     }
                                 },
-                                labelLine: {
-                                    normal: {
-                                        show: false
-                                    }
-                                },
-                                data:[
-                                    {value:335, name:'直接访问'},
-                                    {value:310, name:'邮件营销'},
-                                    {value:234, name:'联盟广告'},
-                                    {value:135, name:'视频广告'},
-                                    {value:1548, name:'搜索引擎'}
-                                ]
-                            }
-                        ]
-                    };
-                    // 绘制图表
-                    myChart.setOption(option);
-                });
+                                emphasis: {
+                                    show: false,
+                                    textStyle: {
+                                        fontSize: '20',
+                                        fontWeight: 'bold',
+                                        color: '#fff',
+                                    },
+                                }
+                            },
+                            labelLine: {
+                                normal: {
+                                    show: false
+                                }
+                            },
+                            data: [
+                                {value: that.EmergencyStatisticsData[1].mainPlatform, name: '处理完结数'},
+                                {value: that.EmergencyStatisticsData[2].mainPlatform, name: '正在处理数'},
+                            ],
+                            color: ['#00B050','#FFC000']
+                        },
+                    ]
+                };
+
+                // 绘制图表
+                myChart.setOption(option);
             },
             getAllData(){
                 const that = this;
@@ -715,7 +666,6 @@
             },
         },
         mounted() {
-            this.creatLabel();
             this.getProjectVal();
             this.getContractVal();
             this.getAllData();
@@ -724,6 +674,9 @@
         },
         created() {
 
+        },
+        updated() {
+            this.creatLabel();
         }
     }
 </script>
