@@ -236,7 +236,7 @@
                                     <td class="tableRight">{{DIHDUSNData.recordMessage.f_Latitude}}</td>
                                 </tr>
                                 <tr>
-                                    <td>检查发问题:</td>
+                                    <td>检查发现问题:</td>
                                     <td class="tableRight" colspan="3"><button class="CheckIssueProblems" v-show="DIHDUSNData.recordMessageItem.length>=1" @click="CheckIssueProblemsDetail">点击查看</button></td><span v-show="DIHDUSNData.recordMessageItem.length === 0">无</span>
                                 </tr>
                                 <tr>
@@ -311,7 +311,7 @@
                         </table>
                     </div>
                     <div class="CheckIssueProblemsTable" v-show="CheckIssueProblemsDetailShow">
-                        <h3>检查发问题</h3>
+                        <h3>检查发现问题</h3>
                         <p @click="CheckIssueProblemsHide">X</p>
                         <table>
                             <div v-show="DIHDUSNData.recordMessageItem.length === 0">无信息</div>
@@ -331,6 +331,7 @@
                             </tbody>
                         </table>
                     </div>
+                    <div class="CheckIssueProblemsTableShield" v-show="CheckIssueProblemsDetailShow"></div>
                 </div>
             </div>
         </div>
@@ -1303,15 +1304,26 @@
     }
 
     .CheckIssueProblemsTable{
-        position: absolute;
+        display: flex;
+        justify-content: flex-end;
+        align-items: flex-end;
+        position: fixed;
         top: 40%;
-        left: 5%;
         z-index: 10000;
         background-color: #0d1963;
         padding: 15px;
         overflow-y: auto;
         border: 1px dashed #2E75B6;
         border-radius: 5px;
+    }
+
+    .CheckIssueProblemsTableShield{
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        top: 0;
+        z-index: 9000;
+        background-color: rgba(14, 22, 94, 0.53);
     }
 
     .CheckIssueProblemsTable table{

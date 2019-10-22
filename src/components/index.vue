@@ -637,12 +637,20 @@
         justify-content: space-between;
     }
 
+    .titleLeft a{
+        color: #fff;
+    }
+
     .titleRight{
         position: absolute;
         bottom: 0;
         right: 0;
         display: flex;
         justify-content: space-between;
+    }
+
+    .titleRight a{
+        color: #fff;
     }
 
     .search {

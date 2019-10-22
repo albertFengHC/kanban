@@ -499,6 +499,7 @@
                             </div>
                         </div>
                     </div>
+                    <div class="TunnelMonitoringShield" v-show="CheckTunnelMonitoringDetailShow"></div>
                 </div>
                 <div class="rightMid">
                     <h3>特种设备安全预警监控</h3>
@@ -1247,6 +1248,10 @@
         flex-direction: column;
     }
 
+    .leftTop{
+        flex: 1;
+    }
+
     .dateShow {
         display: flex;
         justify-content: space-between;
@@ -1341,6 +1346,7 @@
         background-size: 100% 100%;
         padding: 25px;
         position: relative;
+        flex: 4;
     }
 
     .mapFrame {
@@ -1414,6 +1420,7 @@
         display: flex;
         justify-content: space-between;
         padding-top: 15px;
+        flex: 2;
     }
 
     .leftBottomLeft,.leftBottomMid,.leftBottomRight{
@@ -1780,17 +1787,30 @@
 
     /*隧道监控*/
     .TunnelMonitoring{
-        position: absolute;
+        position: fixed;
         top: 15%;
         left: 0;
         z-index: 10000;
-        background-color: #fff;
+        background-color: #0D1963;
         padding: 15px;
         overflow-y: auto;
         border: 1px dashed #2E75B6;
         border-radius: 5px;
-        color: #4b4b4b;
+        color: #fff;
         margin: 0 auto;
+    }
+
+    .TunnelMonitoringShield{
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        top: 0;
+        z-index: 9000;
+        background-color: rgba(14, 22, 94, 0.53);
+    }
+
+    .TunnelMonitoring h3{
+        padding-bottom: 15px;
     }
 
     .TunnelMonitoring>div{
@@ -1812,8 +1832,17 @@
         overflow-x: auto;
     }
 
+    .TunnelMonitoring table th{
+        padding-bottom: 5px;
+        border-bottom: 1px dashed #2E75B6;
+    }
+
+    .TunnelMonitoring table td{
+        padding-bottom: 5px;
+        border-bottom: 1px dashed #2E75B6;
+    }
+
     .TunnelMonitoring .tableFrameTableTitle{
-        background-color: #fff;
         z-index: 1000;
         padding: 10px 0;
         position: relative;
