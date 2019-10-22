@@ -1001,7 +1001,6 @@
     .rightBottom{
         background: url('./../assets/ERMonitoringImg/应急时间快报详情.png') no-repeat;
         background-size: 100% 100%;
-        height: 100%;
         padding: 10px;
         padding-right: 30px;
         margin-left: 5px;

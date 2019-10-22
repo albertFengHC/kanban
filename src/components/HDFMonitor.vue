@@ -1308,13 +1308,20 @@
         justify-content: flex-end;
         align-items: flex-end;
         position: fixed;
-        top: 40%;
+        top: 55%;
         z-index: 10000;
         background-color: #0d1963;
         padding: 15px;
         overflow-y: auto;
         border: 1px dashed #2E75B6;
         border-radius: 5px;
+    }
+
+    .CheckIssueProblemsTable h3{
+        position: absolute;
+        left: 0;
+        top: 0;
+        padding: 10px;
     }
 
     .CheckIssueProblemsTableShield{
@@ -1329,6 +1336,7 @@
     .CheckIssueProblemsTable table{
         color: #02E3FA;
         text-align: left;
+        margin-top: 25px;
     }
 
     .CheckIssueProblemsTable table th{
