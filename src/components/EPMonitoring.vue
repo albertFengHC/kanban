@@ -415,7 +415,6 @@
                 // 发送 POST 请求
                 this.$getUrlEP('getApproachPerson.do', parameter)
                     .then(function (data) {
-                        console.log(data);
                         that.EntryPersonnelMonitoringData.percentage = data.percentage[0];
                         that.EntryPersonnelMonitoringData.approachPerson = data.approachPerson;
                         that.EntryPersonnelMonitoringData.approachPersonNum = data.approachPersonNum[0];

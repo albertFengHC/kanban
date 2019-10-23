@@ -88,7 +88,9 @@
                     </div>
                 </div>
                 <div class="leftMid">
-                    <myMap :msg='mapData' ref="map" class="myMap"/>
+                    <keep-alive>
+                        <myMap :msg='mapData' ref="map" class="myMap"/>
+                    </keep-alive>
                 </div>
                 <div class="leftBottom" v-if="lrSaveDrilling != ''">
                     <div class="leftBottomLeft">
@@ -180,7 +182,6 @@
                         <h4>主平台应急事件统计</h4>
                         <div class="rightTopLeftFrame">
                             <div class="rightTopLeftFrameLeft">
-<!--                                <div></div>-->
                                 <div>
                                     <P>应急事件数</P>
                                     <P><i>{{EmergencyStatisticsData[0].mainPlatform}}</i>项</P>
@@ -542,7 +543,6 @@
             creatLabel() {
                 const that = this;
                 const echarts = require('echarts');
-                console.log(that.$refs.labelPie);
                 // 基于准备好的dom，初始化echarts实例
                 const myChart = echarts.init(that.$refs.labelPie);
 
@@ -635,7 +635,6 @@
                 // 发送 POST 请求
                 this.$getUrlEP('getSaveAccident.do', parameter)
                     .then(function (data) {
-                        console.log(data);
                         that.EmergencyStatisticsData = data.saveAccident;
 
                     })

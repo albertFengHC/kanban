@@ -1105,7 +1105,6 @@
                 // 发送 POST 请求
                 this.$getUrlEP('getSafetyRisk.do', parameter)
                     .then(function (response) {
-                        console.log(response);
                         let data = response;
                         data.safetyRiskList.map(data => {
                             if(data.ttype === 1){
@@ -1145,11 +1144,7 @@
                 // 发送 POST 请求
                 this.$getUrlEP('getRiskDanger.do', parameter)
                     .then(function (data) {
-                        console.log(data);
                         that.RiskHandlingInformationStatisticsData.riskDanger = data.riskDanger[0];
-
-                        that.creatLabelMid();
-                        that.creatLabelRight();
                     })
                     .catch(function (error) {
                         // console.log(error);
@@ -1178,7 +1173,6 @@
                 // 发送 POST 请求
                 this.$getUrlEP('getTunnelDanger.do', parameter)
                     .then(function (data) {
-                        console.log(data);
                         that.TunnelMonitoringData.personLocationList = data.personLocationList;
                         that.TunnelMonitoringData.personCheckList = data.personCheckList;
                         that.TunnelMonitoringData.environmentalList = data.environmentalList;
@@ -1206,6 +1200,10 @@
             this.getSRData();
             this.getRiskHandlingInformationStatisticsData();
             this.getTunnelMonitoringData();
+        },
+        updated() {
+            this.creatLabelMid();
+            this.creatLabelRight();
         }
     }
 </script>

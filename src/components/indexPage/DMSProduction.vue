@@ -74,7 +74,6 @@
                 // 发送 POST 请求
                 this.$getUrl('getLrSaveDrilling.do', parameter)
                     .then(function (data) {
-                        console.log(data);
                         that.lrSaveDrilling = data.lrSaveDrilling;
                     })
                     .catch(function (error) {

@@ -1,36 +1,36 @@
 <template>
     <div class="myMap">
-        <div class="video" v-show="showVideo">
-            <video :src="videoUrl" controls="controls" controlslist="nodownload"></video>
-            <span @click="videoHide()">X</span>
+            <div class="video" v-show="showVideo">
+                <video :src="videoUrl" controls="controls" controlslist="nodownload"></video>
+                <span @click="videoHide()">X</span>
+            </div>
+            <div ref="map" class="map"></div>
+            <div class="typeBtn">
+                <div>
+                    <img src="../../assets/indexImg/六边形30x30.png" alt="" class="warningIcon" @click="warningSwitchBtn">
+                </div>
+                <div>
+                    <img src="../../assets/indexImg/六边形30x30.png" alt="" class="warningIcon" @click="warningSwitchBtn">
+                </div>
+                <div>
+                    <img src="../../assets/indexImg/六边形30x30.png" alt="" class="warningIcon" @click="warningSwitchBtn">
+                </div>
+                <div v-for="(data,index) in typeData"  :key="data.value" @click="changeType($event,index)">
+                    <img :src="data.show === true?typeImgA:typeImgN" alt="">
+                    <p>{{data.text}}</p>
+                </div>
+                <div>
+                    <img src="../../assets/indexImg/六边形30x30.png" alt="" class="warningIcon" @click="warningSwitchBtn">
+                </div>
+                <div>
+                    <img src="../../assets/indexImg/六边形30x30.png" alt="" class="warningIcon" @click="warningSwitchBtn">
+                </div>
+                <div>
+                    <img src="../../assets/indexImg/六边形30x30.png" alt="" class="warningIcon" @click="warningSwitchBtn">
+                </div>
+                <img src="../../assets/indexImg/线条.png" alt="" class="typeBtnLine">
+            </div>
         </div>
-        <div ref="map" class="map"></div>
-        <div class="typeBtn">
-            <div>
-                <img src="../../assets/indexImg/六边形30x30.png" alt="" class="warningIcon" @click="warningSwitchBtn">
-            </div>
-            <div>
-                <img src="../../assets/indexImg/六边形30x30.png" alt="" class="warningIcon" @click="warningSwitchBtn">
-            </div>
-            <div>
-                <img src="../../assets/indexImg/六边形30x30.png" alt="" class="warningIcon" @click="warningSwitchBtn">
-            </div>
-            <div v-for="(data,index) in typeData"  :key="data.value" @click="changeType($event,index)">
-                <img :src="data.show === true?typeImgA:typeImgN" alt="">
-                <p>{{data.text}}</p>
-            </div>
-            <div>
-                <img src="../../assets/indexImg/六边形30x30.png" alt="" class="warningIcon" @click="warningSwitchBtn">
-            </div>
-            <div>
-                <img src="../../assets/indexImg/六边形30x30.png" alt="" class="warningIcon" @click="warningSwitchBtn">
-            </div>
-            <div>
-                <img src="../../assets/indexImg/六边形30x30.png" alt="" class="warningIcon" @click="warningSwitchBtn">
-            </div>
-            <img src="../../assets/indexImg/线条.png" alt="" class="typeBtnLine">
-        </div>
-    </div>
 </template>
 
 <script>

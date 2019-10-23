@@ -521,14 +521,12 @@
                 this.$getUrlEP('getRecordRectify.do', parameter)
                     .then(function (data) {
                         that.HDSGCUSNData = data.recordRectify;
-                        console.log(that.HDSGCUSNData);
                     })
                     .catch(function (error) {
 
                     });
             },
             getDIHDUSNData(e){
-                console.log(e);
                 const that = this;
                 const parameter = {
                     fid: e,
@@ -536,11 +534,9 @@
                 // 发送 POST 请求
                 this.$getUrlEP('getRecordRectifyByFid.do', parameter)
                     .then(function (data) {
-                        console.log(data);
                         data.recordMessage === null?that.DIHDUSNData.recordMessage = '':that.DIHDUSNData.recordMessage = data.recordMessage;
                         data.recordBack === null?that.DIHDUSNData.recordBack = '':that.DIHDUSNData.recordBack = data.recordBack;
                         data.recordReview === null?that.DIHDUSNData.recordReview = '':that.DIHDUSNData.recordReview = data.recordReview;
-                        console.log(that.DIHDUSNData);
                         data.recordMessageItem === null?that.DIHDUSNData.recordMessageItem = '':that.DIHDUSNData.recordMessageItem = data.recordMessageItem;
                     })
                     .catch(function (error) {
