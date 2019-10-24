@@ -537,6 +537,7 @@
                         data.recordMessage === null?that.DIHDUSNData.recordMessage = '':that.DIHDUSNData.recordMessage = data.recordMessage;
                         data.recordBack === null?that.DIHDUSNData.recordBack = '':that.DIHDUSNData.recordBack = data.recordBack;
                         data.recordReview === null?that.DIHDUSNData.recordReview = '':that.DIHDUSNData.recordReview = data.recordReview;
+                        console.log(data.recordReview);
                         data.recordMessageItem === null?that.DIHDUSNData.recordMessageItem = '':that.DIHDUSNData.recordMessageItem = data.recordMessageItem;
                     })
                     .catch(function (error) {

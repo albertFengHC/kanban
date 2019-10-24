@@ -88,9 +88,7 @@
                     </div>
                 </div>
                 <div class="leftMid">
-                    <keep-alive>
-                        <myMap :msg='mapData' ref="map" class="myMap"/>
-                    </keep-alive>
+                    <myMap :msg='mapData' ref="map" class="myMap"/>
                 </div>
                 <div class="leftBottom" v-if="lrSaveDrilling != ''">
                     <div class="leftBottomLeft">
@@ -606,6 +604,7 @@
 
                 // 绘制图表
                 myChart.setOption(option);
+
             },
             getAllData(){
                 const that = this;
@@ -636,7 +635,6 @@
                 this.$getUrlEP('getSaveAccident.do', parameter)
                     .then(function (data) {
                         that.EmergencyStatisticsData = data.saveAccident;
-
                     })
                     .catch(function (error) {
 
@@ -669,13 +667,24 @@
             this.getAllData();
             this.getEmergencyStatisticsData();
             this.getDetailsEmergencyQuickReportContinuationReportData();
+
         },
         created() {
 
         },
         updated() {
             this.creatLabel();
-        }
+        },
+        // watch:{
+        //     EmergencyStatisticsData: {
+        //         handler(val, oldVal){
+        //             console.log(val);
+        //             console.log(oldVal);
+        //             this.creatLabel();
+        //         },
+        //         deep: true,
+        //     }
+        // }
     }
 </script>
 

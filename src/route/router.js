@@ -24,33 +24,21 @@ const router = new VueRouter({
             path: '/EPMonitoring',
             name: 'EPMonitoring',
             component: EPMonitoring,
-            meta: {
-                keepAlive: true // 需要被缓存
-            }
         },
         {
             path: '/SRMonitoring',
             name: 'SRMonitoring',
             component: SRMonitoring,
-            meta: {
-                keepAlive: true // 需要被缓存
-            }
         },
         {
             path: '/HDFMonitor',
             name: 'HDFMonitor',
             component: HDFMonitor,
-            meta: {
-                keepAlive: true // 需要被缓存
-            }
         },
         {
             path: '/ERMonitoring',
             name: 'ERMonitoring',
             component: ERMonitoring,
-            meta: {
-                keepAlive: true // 需要被缓存
-            }
         },
         {path:'*',redirect:'/indexPage'}
     ]
